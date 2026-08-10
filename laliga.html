@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Liga 2026/27 — Sports Live</title>
+<meta name="description" content="Live La Liga 2026/27 scores, fixtures, and upcoming matches on Sports Live.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="league" data-league="laliga">
+<nav class="site-nav">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="competitions.html">Competitions</a>
+  <a class="nav-link active" href="laliga.html">La Liga</a>
+</nav>
+<div class="page">
+  <header class="hero hero-compact">
+    <div>
+      <p class="eyebrow">La Liga</p>
+      <h1>2026/27 season</h1>
+      <p class="hero-copy">Live scores, upcoming fixtures, and recent results from Spain's top division.</p>
+    </div>
+    <div class="hero-panel">
+      <p class="panel-label">La Liga</p>
+      <p class="panel-copy">A competition-style feed for ongoing La Liga action.</p>
+      <p class="meta-label">Updated at <span id="updated-at">—</span></p>
+    </div>
+  </header>
+
+  <section class="section section-summary">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Match overview</p>
+        <h2>Current La Liga activity</h2>
+      </div>
+      <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <span>Live now</span>
+        <strong id="overview-live">0</strong>
+      </div>
+      <div class="overview-card">
+        <span>Upcoming</span>
+        <strong id="overview-upcoming">0</strong>
+      </div>
+      <div class="overview-card">
+        <span>Finished</span>
+        <strong id="overview-finished">0</strong>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-grid">
+    <main>
+      <section class="section section-panel">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Latest action</p>
+            <h2>Live matches</h2>
+          </div>
+        </div>
+        <div id="live-list" class="match-list">
+          <p class="empty-state">Loading live matches…</p>
+        </div>
+      </section>
+
+      <section class="section section-panel">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Upcoming fixtures</p>
+            <h2>Next matches</h2>
+          </div>
+        </div>
+        <div id="upcoming-list" class="match-list">
+          <p class="empty-state">Loading upcoming fixtures…</p>
+        </div>
+      </section>
+    </main>
+
+    <aside class="side-panel">
+      <section class="section competition-card">
+        <div>
+          <p class="comp-label">Season snapshot</p>
+          <h2>La Liga 2026/27</h2>
+          <p>Quick access to the latest La Liga match updates and upcoming fixtures in a clean, mobile-first view.</p>
+        </div>
+      </section>
+
+      <section class="section competition-card">
+        <div>
+          <p class="comp-label">How it works</p>
+          <ul class="info-list">
+            <li>Live matches are shown first.</li>
+            <li>Upcoming fixtures refresh on demand.</li>
+            <li>Results load from local competition data.</li>
+          </ul>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="page-footer">
+    <p><a href="competitions.html">Back to Competitions</a></p>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

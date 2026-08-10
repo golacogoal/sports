@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>World Cup 2026 Schedule - Live Scores & Local Times</title>
-<meta name="description" content="All 104 matches with live scores, standings and bracket. Times in your timezone. Free, no ads.">
-<meta name="keywords" content="FIFA World Cup 2026 schedule, World Cup 2026 fixtures, World Cup 2026 times, World Cup 2026 AEST, World Cup 2026 Melbourne, World Cup 2026 Australia, World Cup 2026 group stage, World Cup 2026 knockout">
-<meta name="author" content="kingdoggydog">
-<link rel="canonical" href="https://kingdoggydog.github.io/worldcup2026/">
+<title>Sports Live — World Cup 2026 schedule</title>
+<meta name="description" content="Full World Cup 2026 schedule on Sports Live. All matches, kick-off times, groups, knockout rounds, and live progress.">
+<meta name="keywords" content="FIFA World Cup 2026 schedule, World Cup 2026 fixtures, World Cup 2026 times, World Cup 2026 group stage, World Cup 2026 knockout, football live scores">
+<meta name="author" content="Sports Live">
+<link rel="canonical" href="https://golacogoal.github.io/sports/worldcup.html">
 
 <!-- Open Graph (for Facebook, Reddit, LinkedIn previews) -->
 <meta property="og:title" content="World Cup 2026 Schedule - Live Scores & Local Times">
@@ -24,7 +24,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* ── DARK MODE (default) ─────────────────────────────────────────────────── */
+  /* â”€â”€ DARK MODE (default) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   :root {
     --bg:           #0A0E1A;
     --bg-card:      #141829;
@@ -51,7 +51,7 @@
   .E{color:#1ABC9C}.F{color:#5DADE2}.G{color:#A569BD}.H{color:#EC407A}
   .I{color:#FF7043}.J{color:#26C6DA}.K{color:#9CCC65}.L{color:#FFA726}
 
-  /* ── PRINT MODE (toggled) ────────────────────────────────────────────────── */
+  /* â”€â”€ PRINT MODE (toggled) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   body.print-mode {
     --bg:           #ffffff;
     --bg-card:      #ffffff;
@@ -80,7 +80,7 @@
   body.print-mode .I{color:#ba4a00} body.print-mode .J{color:#0e6655}
   body.print-mode .K{color:#1d6328} body.print-mode .L{color:#d4800a}
 
-  /* ── BASE STYLES ─────────────────────────────────────────────────────────── */
+  /* â”€â”€ BASE STYLES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   body {
     background: var(--bg);
     color: var(--text);
@@ -88,7 +88,7 @@
     transition: background 0.3s, color 0.3s;
   }
 
-  /* ── NIGHT MODE: free-flowing web page layout ────────────────────────────── */
+  /* â”€â”€ NIGHT MODE: free-flowing web page layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .page {
     max-width: 900px;
     width: 100%;
@@ -102,7 +102,7 @@
   }
 
 
-  /* ── MATCH EVENT CARD (hover/tap popup) ──────────────────────────────── */
+  /* â”€â”€ MATCH EVENT CARD (hover/tap popup) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .match { position: relative; cursor: pointer; }
   .event-card {
     position: absolute;
@@ -152,7 +152,7 @@
     .event-card { width: 94vw; left: 50%; }
   }
 
-  /* ── PRINT MODE: lock to A4 ──────────────────────────────────────────────── */
+  /* â”€â”€ PRINT MODE: lock to A4 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   body.print-mode .page {
     width: 210mm; max-width: 210mm;
     padding: 6mm 7mm 4mm 7mm;
@@ -168,7 +168,7 @@
     #next-match-card > span#nm-venue { order: 3; width: 100% !important; text-align: center !important; }
   }
 
-  /* ── HEADER ──────────────────────────────────────────────────────────────── */
+  /* â”€â”€ HEADER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .header {
     display: flex; justify-content: space-between; align-items: flex-start;
     border-bottom: 2.5px solid var(--header-border);
@@ -199,7 +199,7 @@
   }
   body.print-mode .header-right { gap: 4px; }
 
-  /* ── CONTROLS ────────────────────────────────────────────────────────────── */
+  /* â”€â”€ CONTROLS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .ctrl-row { display: flex; align-items: center; gap: 8px; }
   .highlight-rows { display: flex; flex-direction: column; gap: 6px; }
   .highlight-row { display: flex; align-items: center; gap: 6px; }
@@ -369,7 +369,7 @@
   }
   body.print-mode .highlight-note { font-size: 8px; }
 
-  /* ── LEGEND ──────────────────────────────────────────────────────────────── */
+  /* â”€â”€ LEGEND â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .legend {
     display: flex; flex-wrap: wrap; gap: 5px 12px;
     margin-bottom: 16px; flex-shrink: 0;
@@ -387,7 +387,7 @@
   .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
   body.print-mode .legend-dot { width: 8px; height: 8px; border-radius: 1px; }
 
-  /* ── SCHEDULE GRID ───────────────────────────────────────────────────────── */
+  /* â”€â”€ SCHEDULE GRID â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .schedule {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 14px 16px; flex: 1; align-content: start;
@@ -463,7 +463,7 @@
     body:not(.print-mode) .page { padding: 16px 14px 24px 14px; }
   }
 
-  /* ── DAY BLOCK ───────────────────────────────────────────────────────────── */
+  /* â”€â”€ DAY BLOCK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .day { break-inside: avoid; }
   .day-header {
     display: flex; align-items: baseline; gap: 6px;
@@ -486,7 +486,7 @@
   }
   body.print-mode .day-date { font-size: 10px; color: #111; font-weight: 700; }
 
-  /* ── MATCH ROW ───────────────────────────────────────────────────────────── */
+  /* â”€â”€ MATCH ROW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .match {
     display: flex; align-items: center; gap: 8px;
     padding: 7px 10px; margin-bottom: 4px;
@@ -555,7 +555,7 @@
   .flag { width: 18px; height: 13px; object-fit: cover; border-radius: 2px; vertical-align: middle; flex-shrink: 0; }
   body.print-mode .flag { width: 15px; height: 11px; border-radius: 1px; }
 
-  /* ── FOOTER ──────────────────────────────────────────────────────────────── */
+  /* â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .footer {
     margin-top: 20px; padding-top: 10px;
     border-top: 1px solid var(--border);
@@ -572,7 +572,7 @@
   }
 
 
-  /* ── PRINT MEDIA ─────────────────────────────────────────────────────────── */
+  /* â”€â”€ PRINT MEDIA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .schedule-note {
     background: var(--bg-match); border: 1px solid var(--border);
     border-left: 3px solid var(--gold);
@@ -4262,6 +4262,11 @@
   <meta name="twitter:image" content="https://kingdoggydog.github.io/worldcup2026/preview.png">
 </head>
 <body>
+<nav class="site-nav">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link active" href="competitions.html">Competitions</a>
+</nav>
+
 <!-- dark mode is default; .print-mode toggled by JS -->
 <div class="page">
 
@@ -4270,7 +4275,7 @@
       <h1>FIFA World Cup 2026</h1>
       <div class="sub">All 104 matches &bull; 11 June &ndash; 19 July &bull; USA / Canada / Mexico</div>
       <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;">
-        <a href="https://www.buymeacoffee.com/coolcato" target="_blank" id="bmc-header">☕ Buy me a coffee</a>
+        <a href="https://www.buymeacoffee.com/coolcato" target="_blank" id="bmc-header">â˜• Buy me a coffee</a>
         <div style="display:flex;gap:8px;flex-wrap:nowrap;">
           <a href="https://kingdoggydog.github.io/worldcup2026/" class="nav-btn active">&#128197; Schedule</a>
           <a href="https://kingdoggydog.github.io/worldcup2026/groups.html" class="nav-btn">&#128202; Groups</a>
@@ -4445,8 +4450,8 @@
             <option value="Uzbekistan">Uzbekistan</option>
           </select>
           <div style="display:flex;gap:6px;">
-            <button onclick="clearFilters()" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;cursor:pointer;border:1.5px solid var(--ctrl-border);background:transparent;color:var(--text-muted);transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--ctrl-border)';this.style.color='var(--text-muted)'">✕ Clear</button>
-            <button onclick="downloadICS()" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;cursor:pointer;border:1.5px solid var(--ctrl-border);background:transparent;color:var(--text-muted);transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--ctrl-border)';this.style.color='var(--text-muted)'">📅 Calendar</button>
+            <button onclick="clearFilters()" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;cursor:pointer;border:1.5px solid var(--ctrl-border);background:transparent;color:var(--text-muted);transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--ctrl-border)';this.style.color='var(--text-muted)'">âœ• Clear</button>
+            <button onclick="downloadICS()" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;cursor:pointer;border:1.5px solid var(--ctrl-border);background:transparent;color:var(--text-muted);transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--ctrl-border)';this.style.color='var(--text-muted)'">ðŸ“… Calendar</button>
           </div>
         </div>
       </div>
@@ -4516,7 +4521,7 @@
     font-family: 'Barlow Condensed', sans-serif;
   ">
     <span style="color:var(--text);font-weight:600;font-size:14px;white-space:nowrap;">
-      📬 Get notified — EPL, Champs League, MLS &amp; more
+      ðŸ“¬ Get notified â€” EPL, Champs League, MLS &amp; more
     </span>
     <div style="display:flex;border:1px solid rgba(201,168,76,0.3);border-radius:4px;overflow:hidden;background:#1a1a1a;">
       <input type="email" id="email-input-desk" placeholder="your@email.com"
@@ -4529,9 +4534,9 @@
         NOTIFY ME
       </button>
     </div>
-    <span id="signup-success-desk" style="display:none;color:#2ECC71;font-size:13px;font-weight:600;white-space:nowrap;">✓ You're on the list!</span>
+    <span id="signup-success-desk" style="display:none;color:#2ECC71;font-size:13px;font-weight:600;white-space:nowrap;">âœ“ You're on the list!</span>
     <span style="color:var(--text-muted);font-size:13px;">|</span>
-    <span style="color:var(--text-muted);font-size:13px;white-space:nowrap;">☕ Free &amp; ad-free — if it's been useful,</span>
+    <span style="color:var(--text-muted);font-size:13px;white-space:nowrap;">â˜• Free &amp; ad-free â€” if it's been useful,</span>
     <a href="https://www.buymeacoffee.com/coolcato" target="_blank"
        style="background:transparent;color:var(--gold);border:1px solid var(--gold);
        padding:6px 12px;border-radius:4px;font-weight:700;font-size:13px;
@@ -4547,7 +4552,7 @@
       border-radius:8px;padding:10px 16px;margin-bottom:8px;
       font-family:'Barlow Condensed',sans-serif;
     ">
-      <div style="color:var(--text);font-weight:600;font-size:14px;margin-bottom:8px;">📬 Get notified — EPL, CL, MLS &amp; more</div>
+      <div style="color:var(--text);font-weight:600;font-size:14px;margin-bottom:8px;">ðŸ“¬ Get notified â€” EPL, CL, MLS &amp; more</div>
       <div style="display:flex;border:1px solid rgba(201,168,76,0.3);border-radius:4px;overflow:hidden;background:#1a1a1a;">
         <input type="email" id="email-input-mob" placeholder="your@email.com"
           style="flex:1;background:transparent;border:none;outline:none;padding:8px 10px;
@@ -4559,7 +4564,7 @@
           NOTIFY ME
         </button>
       </div>
-      <div id="signup-success-mob" style="display:none;color:#2ECC71;font-size:13px;font-weight:600;margin-top:6px;">✓ You're on the list!</div>
+      <div id="signup-success-mob" style="display:none;color:#2ECC71;font-size:13px;font-weight:600;margin-top:6px;">âœ“ You're on the list!</div>
     </div>
     <div style="
       background:rgba(201,168,76,0.07);border:1px solid var(--gold);
@@ -4567,7 +4572,7 @@
       display:flex;align-items:center;justify-content:space-between;
       font-family:'Barlow Condensed',sans-serif;gap:12px;
     ">
-      <span style="color:var(--text-muted);font-size:13px;">☕ Free &amp; ad-free — if it's been useful</span>
+      <span style="color:var(--text-muted);font-size:13px;">â˜• Free &amp; ad-free â€” if it's been useful</span>
       <a href="https://www.buymeacoffee.com/coolcato" target="_blank"
          style="background:transparent;color:var(--gold);border:1px solid var(--gold);
          padding:6px 14px;border-radius:4px;font-weight:700;font-size:13px;
@@ -4579,7 +4584,7 @@
     <p>Live scores &amp; match data provided by <a href="https://www.football-data.org" target="_blank" style="color:var(--gold);text-decoration:none;">football-data.org</a></p>
   </div>
   <div style="text-align:center;margin-top:12px;">
-    <a href="https://www.reddit.com/user/coolcato" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;letter-spacing:1px;">👋 Made by u/coolcato</a>
+    <a href="https://www.reddit.com/user/coolcato" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;letter-spacing:1px;">ðŸ‘‹ Made by u/coolcato</a>
   </div>
 
 
@@ -4755,12 +4760,12 @@ function teamsHtml(teamsStr) {
 }
 
 
-// ── LIVE SCORES FROM data.json ────────────────────────────────────────────────
+// â”€â”€ LIVE SCORES FROM data.json â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Maps API shortName/name values to our display names in MATCHES array
 const API_NAME_MAP = {
   'Korea Republic':'South Korea', 'United States':'USA',
   'Bosnia-H.':'Bosnia','Bosnia-Herzegovina':'Bosnia','Bosnia & Herz.':'Bosnia',
-  'Curaçao':'Curacao', 'Turkey':'Turkiye',
+  'CuraÃ§ao':'Curacao', 'Turkey':'Turkiye',
   'Cape Verde Islands':'Cape Verde', 'Cape Verde':'Cape Verde',
   'Congo DR':'Congo DR', 'Ivory Coast':'Ivory Coast',
 };
@@ -4875,7 +4880,7 @@ function applyGroupWinners(teamsStr, id) {
 }
 
 
-// ── MATCH EVENT CARD (hover/tap for goals, cards, subs) ────────────────────
+// â”€â”€ MATCH EVENT CARD (hover/tap for goals, cards, subs) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function getMatchId(teamsStr, id) {
   if (id) return id;
   const parts = teamsStr.split(' v ');
@@ -5251,8 +5256,8 @@ function render(offset, team) {
     };
     const grpColor = grpColors[nextMatch.grp] || '#C9A84C';
     const grpLabel = ['R32','R16','QF','SF','3rd','Final'].includes(nextMatch.grp)
-      ? `<span style="color:${grpColor};font-weight:800;">${nextMatch.grp} ${nextMatch.num}</span> · ${nextMatch.venue}`
-      : `<span style="color:${grpColor};font-weight:800;">Group ${nextMatch.grp}</span> · ${nextMatch.venue}`;
+      ? `<span style="color:${grpColor};font-weight:800;">${nextMatch.grp} ${nextMatch.num}</span> Â· ${nextMatch.venue}`
+      : `<span style="color:${grpColor};font-weight:800;">Group ${nextMatch.grp}</span> Â· ${nextMatch.venue}`;
     document.getElementById('nm-venue').innerHTML = grpLabel;
     document.getElementById('nm-home-flag').src = flagUrl(home);
     document.getElementById('nm-home-flag').alt = home;
@@ -5310,7 +5315,7 @@ const ALL_TEAMS = ['Algeria','Argentina','Australia','Austria','Belgium','Bosnia
 
 function teamSelectHTML(selectedVal, rowIdx) {
   const taken = _highlightTeams.filter((t,i) => t && t !== 'none' && i !== rowIdx);
-  return '<option value="none">— Remove —</option>' +
+  return '<option value="none">â€” Remove â€”</option>' +
     ALL_TEAMS.filter(t => !taken.includes(t) || t === selectedVal)
       .map(t => `<option value="${t}"${t===selectedVal?' selected':''}>${t}</option>`).join('');
 }
@@ -5328,7 +5333,7 @@ function renderHighlightRows() {
       <select onchange="updateHighlight(${i}, this.value)" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(12px,1.8vw,15px);border:1.5px solid var(--ctrl-border);border-radius:4px;padding:4px 8px;background:var(--ctrl-bg);color:var(--ctrl-text);">
         ${teamSelectHTML(team, i)}
       </select>
-      <button class="hl-remove" onclick="removeHighlight(${i})" title="Remove">✕</button>
+      <button class="hl-remove" onclick="removeHighlight(${i})" title="Remove">âœ•</button>
     </div>`).join('');
   const addBtn = document.getElementById('hl-add-btn');
   if (addBtn) addBtn.style.display = rows.length >= 4 ? 'none' : 'inline-block';
@@ -5813,7 +5818,7 @@ if (koBtn) koBtn.addEventListener('click', () => {
     }, 60000);
   });
 
-  // ── Match event card: hover (desktop) + tap (mobile) ────────────────────
+  // â”€â”€ Match event card: hover (desktop) + tap (mobile) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   let activeCard = null;
   function closeEventCard() {
     if (activeCard) { activeCard.remove(); activeCard = null; }
@@ -5914,3 +5919,4 @@ function submitEmail(suffix) {
 </script>
 </body>
 </html>
+

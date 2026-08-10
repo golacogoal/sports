@@ -3,36 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sports Scores — Quick live football scores</title>
-<meta name="description" content="Quick access to live scores and kick-off times for football competitions. No popups, no autoplay, no clutter.">
+<title>Sports Live — fast football scores</title>
+<meta name="description" content="Fast, clean football scores across competitions. No pop-ups, no clutter.">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="home">
+<nav class="site-nav">
+  <a class="nav-link active" href="index.html">Home</a>
+  <a class="nav-link" href="competitions.html">Competitions</a>
+</nav>
 <div class="page">
   <header class="hero">
     <div>
-      <p class="eyebrow">Quick access to scores</p>
-      <h1>Live football scores, fast.</h1>
-      <p class="hero-copy">Everything you need to know right now: live games, kick-off times, and league summaries. No pop-ups, no autoplay, no wall of stats.</p>
+      <p class="eyebrow">Everything you need. Nothing you don't.</p>
+      <h1>Live football scores made simple.</h1>
+      <p class="hero-copy">A clean, fast dashboard for the matches that matter. Live action, kick-off times, and competition access without the clutter.</p>
     </div>
-    <div class="meta-panel">
-      <span class="meta-label">Last updated</span>
-      <strong id="updated-at">—</strong>
+    <div class="hero-panel">
+      <p class="panel-label">Scoreboard</p>
+      <p class="panel-copy">A lightweight home for live scores and upcoming kick-offs.</p>
+      <p class="meta-label">Updated at <span id="updated-at">—</span></p>
+      <div class="hero-actions">
+        <a class="button" href="competitions.html">Browse competitions</a>
+        <a class="button button-secondary" href="worldcup.html">World Cup schedule</a>
+      </div>
     </div>
   </header>
-
-  <nav class="league-nav" aria-label="League selector">
-    <button type="button" class="league-tab" data-league="worldcup">World Cup 2026</button>
-    <button type="button" class="league-tab" data-league="premier-league">Premier League</button>
-    <button type="button" class="league-tab" data-league="laliga">La Liga</button>
-    <button type="button" class="league-tab" data-league="serie-a">Serie A</button>
-  </nav>
 
   <section class="section section-summary">
     <div class="section-header">
       <div>
         <p class="section-label">Overview</p>
-        <h2>What matters</h2>
+        <h2>Live right now</h2>
       </div>
       <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
     </div>
@@ -55,8 +57,8 @@
   <section class="section">
     <div class="section-header">
       <div>
-        <p class="section-label">Live right now</p>
-        <h2>Live matches</h2>
+        <p class="section-label">Live matches</p>
+        <h2>Happening now</h2>
       </div>
     </div>
     <div id="live-list" class="match-list">
@@ -67,8 +69,8 @@
   <section class="section">
     <div class="section-header">
       <div>
-        <p class="section-label">Next kick-offs</p>
-        <h2>Upcoming</h2>
+        <p class="section-label">Upcoming</p>
+        <h2>Next kick-offs</h2>
       </div>
     </div>
     <div id="upcoming-list" class="match-list">
@@ -76,9 +78,10 @@
     </div>
   </section>
 
-  <section class="section section-footer">
-    <p class="footer-copy">Need the World Cup full schedule? <a href="worldcup.html">Open the full World Cup page</a>.</p>
-  </section>
+  <footer class="page-footer">
+    <p>World Cup schedule is available under <a href="competitions.html">Competitions</a>.</p>
+    <p>Built for clean live football coverage.</p>
+  </footer>
 </div>
 <script src="app.js"></script>
 </body>
