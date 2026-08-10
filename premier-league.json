@@ -1,0 +1,33 @@
+﻿{
+  "competition": {"name": "Premier League", "code": "EPL"},
+  "matches": [
+    {
+      "id": 1001,
+      "utcDate": "2026-10-01T15:00:00Z",
+      "status": "SCHEDULED",
+      "venue": "Old Trafford",
+      "homeTeam": {"name": "Manchester United", "shortName": "Man Utd"},
+      "awayTeam": {"name": "Arsenal", "shortName": "Arsenal"},
+      "score": {"fullTime": {"home": 0, "away": 0}, "duration": "REGULAR"}
+    },
+    {
+      "id": 1002,
+      "utcDate": "2026-10-01T17:30:00Z",
+      "status": "IN_PLAY",
+      "minute": 64,
+      "venue": "Anfield",
+      "homeTeam": {"name": "Liverpool", "shortName": "Liverpool"},
+      "awayTeam": {"name": "Everton", "shortName": "Everton"},
+      "score": {"fullTime": {"home": 2, "away": 1}, "duration": "REGULAR"}
+    },
+    {
+      "id": 1003,
+      "utcDate": "2026-09-30T19:45:00Z",
+      "status": "FINISHED",
+      "venue": "Etihad Stadium",
+      "homeTeam": {"name": "Manchester City", "shortName": "Man City"},
+      "awayTeam": {"name": "Chelsea", "shortName": "Chelsea"},
+      "score": {"fullTime": {"home": 3, "away": 0}, "duration": "REGULAR"}
+    }
+  ]
+}

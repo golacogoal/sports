@@ -1,0 +1,33 @@
+﻿{
+  "competition": {"name": "Serie A", "code": "SA"},
+  "matches": [
+    {
+      "id": 3001,
+      "utcDate": "2026-10-03T19:45:00Z",
+      "status": "SCHEDULED",
+      "venue": "San Siro",
+      "homeTeam": {"name": "AC Milan", "shortName": "Milan"},
+      "awayTeam": {"name": "Juventus", "shortName": "Juve"},
+      "score": {"fullTime": {"home": 0, "away": 0}, "duration": "REGULAR"}
+    },
+    {
+      "id": 3002,
+      "utcDate": "2026-10-03T17:30:00Z",
+      "status": "IN_PLAY",
+      "minute": 71,
+      "venue": "Stadio Olimpico",
+      "homeTeam": {"name": "Roma", "shortName": "Roma"},
+      "awayTeam": {"name": "Napoli", "shortName": "Napoli"},
+      "score": {"fullTime": {"home": 2, "away": 2}, "duration": "REGULAR"}
+    },
+    {
+      "id": 3003,
+      "utcDate": "2026-09-30T18:30:00Z",
+      "status": "FINISHED",
+      "venue": "Allianz Stadium",
+      "homeTeam": {"name": "Inter Milan", "shortName": "Inter"},
+      "awayTeam": {"name": "Fiorentina", "shortName": "Fiorentina"},
+      "score": {"fullTime": {"home": 1, "away": 0}, "duration": "REGULAR"}
+    }
+  ]
+}

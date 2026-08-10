@@ -1,0 +1,33 @@
+﻿{
+  "competition": {"name": "La Liga", "code": "LL"},
+  "matches": [
+    {
+      "id": 2001,
+      "utcDate": "2026-10-02T18:00:00Z",
+      "status": "SCHEDULED",
+      "venue": "Camp Nou",
+      "homeTeam": {"name": "Barcelona", "shortName": "Barça"},
+      "awayTeam": {"name": "Real Madrid", "shortName": "Real"},
+      "score": {"fullTime": {"home": 0, "away": 0}, "duration": "REGULAR"}
+    },
+    {
+      "id": 2002,
+      "utcDate": "2026-10-02T20:30:00Z",
+      "status": "IN_PLAY",
+      "minute": 54,
+      "venue": "Wanda Metropolitano",
+      "homeTeam": {"name": "Atletico Madrid", "shortName": "Atleti"},
+      "awayTeam": {"name": "Sevilla", "shortName": "Sevilla"},
+      "score": {"fullTime": {"home": 1, "away": 1}, "duration": "REGULAR"}
+    },
+    {
+      "id": 2003,
+      "utcDate": "2026-09-29T17:00:00Z",
+      "status": "FINISHED",
+      "venue": "San Mamés",
+      "homeTeam": {"name": "Athletic Bilbao", "shortName": "Athletic"},
+      "awayTeam": {"name": "Valencia", "shortName": "Valencia"},
+      "score": {"fullTime": {"home": 2, "away": 2}, "duration": "REGULAR"}
+    }
+  ]
+}

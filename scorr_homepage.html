@@ -1,0 +1,3305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scorr - Live Football Scores</title>
+  <!-- Session 32 (18 July 2026): social/meta tags. STATIC by necessity -
+       WhatsApp/reddit/Facebook scrapers never run JS, so these cannot ride
+       the core.js nav/head component. One block per page, og-image.png at
+       the site root (1200x630). Param-varying pages (competition/team)
+       carry NO canonical - a bare canonical would collapse every comp/team
+       URL into one for Google; static pages carry theirs. -->
+  <meta name="description" content="Fast, free live scores, fixtures, tables and results across 30 football competitions. Goal alerts the instant your teams score. No ads, no clutter.">
+  <link rel="canonical" href="https://scorr.live/">
+  <meta name="theme-color" content="#0d0d0d">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Scorr">
+  <meta property="og:title" content="Scorr - Live Football Scores">
+  <meta property="og:description" content="Fast, free live scores, fixtures, tables and results across 30 football competitions. Goal alerts the instant your teams score. No ads, no clutter.">
+  <meta property="og:url" content="https://scorr.live/">
+  <meta property="og:image" content="https://scorr.live/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Scorr - live football scores">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scorr - Live Football Scores">
+  <meta name="twitter:description" content="Fast, free live scores, fixtures, tables and results across 30 football competitions. Goal alerts the instant your teams score. No ads, no clutter.">
+  <meta name="twitter:image" content="https://scorr.live/og-image.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Session D (27 July 2026): PWA. Static here on the primary install
+     target (the dashboard) for reliable install criteria; core.js injects
+     the same link + iOS metas on every other page. -->
+<link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Scorr">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css?v=20260809">
+<link rel="stylesheet" href="css/vidiprinter.css?v=20260730b">
+</head>
+<body>
+<script src="js/core.js?v=20260809"></script>
+<script src="js/competitions.js?v=20260809"></script>
+<script src="js/team-fixtures.js"></script>
+<script src="js/push.js"></script><!-- Session D (27 July 2026): notifications opt-in + A2HS -->
+
+<nav class="site-nav">
+  <!-- Session 25 sitting 1 (18 July 2026): nav markup + wiring moved to
+       the shared component in js/core.js (ScorrCore.injectSiteNav) -
+       filled at init. Do NOT hand-edit nav markup per page any more;
+       edit SITE_NAV_INNER_HTML / MOBILE_NAV_INNER_HTML in core.js. -->
+</nav>
+<script>
+  </script>
+<div class="page">
+  <header style="display:flex; justify-content:space-between; align-items:center; border-bottom:2.5px solid var(--gold); padding-bottom:12px; margin-bottom:8px;">
+    <div class="hero-wordmark" role="img" aria-label="Scorr">
+    <svg viewBox="0 0 580 140" role="img" aria-label="Scorr"><g fill="currentColor"><rect x="21.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="41.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="61.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="1.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="81.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="1.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="21.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="41.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="61.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="81.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="1.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="81.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="21.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="41.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="61.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="141.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="161.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="181.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="121.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="201.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="121.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="121.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="121.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="121.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="201.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="141.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="161.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="181.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="261.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="281.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="301.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="241.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="321.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="241.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="321.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="241.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="321.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="241.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="321.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="241.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="321.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="261.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="281.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="301.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="381.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="401.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="421.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="441.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="441.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="381.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="401.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="421.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="401.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="421.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="361.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="441.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="501.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="521.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="541.50" y="1.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="561.50" y="21.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="561.50" y="41.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="501.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="521.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="541.50" y="61.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="521.50" y="81.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="541.50" y="101.50" width="17.00" height="17.00" rx="2.89"/><rect x="481.50" y="121.50" width="17.00" height="17.00" rx="2.89"/><rect x="561.50" y="121.50" width="17.00" height="17.00" rx="2.89"/></g></svg>
+  </div>
+    <div class="header-right-cluster">
+      <div class="switch header-scores-toggle" id="hide-scores-toggle" role="switch" aria-checked="false" aria-label="Toggle hide scores" tabindex="0">
+        <span class="switch-caption">Scores</span>
+        <span class="switch-label switch-label-left">Hide</span>
+        <div class="switch-track"><div class="switch-thumb"></div></div>
+        <span class="switch-label switch-label-right">Show</span>
+      </div>
+      <div class="mobile-nav-wrap"><!-- Session 25: filled by ScorrCore.injectSiteNav() (js/core.js) --></div>
+    </div>
+  </header>
+  <p class="sub-label" style="margin-bottom:40px;">Everything you need. Nothing you don't.</p>
+  <!-- 26 July 2026 (Andy): older What's New bars (Customisation / Women's /
+       Scottish / more women's) retired - only the newest feature is announced.
+       Add the next feature's bar here when there is one. -->
+  <!-- 2 Aug 2026 (SEO session): data-nosnippet - Google was lifting the
+       goal-alerts announce text into the home search snippet. The attribute
+       bars ALL bars in this stack (current + future) from snippets without
+       changing anything on screen. Do not remove it when swapping bars. -->
+  <div class="whats-new-stack" id="whats-new-stack" data-nosnippet>
+    <!-- Accounts E3 (5 Aug 2026): the goal-alerts bar retired now it has been
+         live a while. Current announce: cross-device sync (live for everyone)
+         plus a coming-soon line. No gate - shows for all visitors, dismissible
+         and content-hashed by the What's New script below. -->
+    <div class="whats-new-bar">
+      <div class="wn-body">
+        <span class="wn-text"><span class="wn-next">New:</span> <strong>Sync across your devices</strong> - your teams, favourites and settings now follow you between phone, tablet and desktop. Pair once under <strong>Sync devices</strong> (in Customise) - no account and no email, just a private code you keep.</span>
+        <span class="wn-text"><span class="wn-next">New:</span> <strong>Liga MX</strong> is live - fixtures, live scores, top scorers and the full Apertura table for all 18 clubs, with the Liguilla places marked.</span>
+      </div>
+      <button type="button" class="wn-close" aria-label="Dismiss this notice">&times;</button>
+    </div>
+  </div>
+  <section id="vidiprinter-section" style="margin-bottom:48px;">
+    <div class="vidiprinter">
+      <div class="vp-header">
+        <a class="vp-title" href="vidiprinter.html" style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;" aria-label="Open the full goal feed"><span class="vp-live-dot"></span>Live goal feed<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></a>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="vp-mode-tag" id="vpModeTag">Waiting</span>
+          <div class="panel-menu">
+            <button type="button" class="panel-menu-btn" aria-label="Feed options" aria-haspopup="true" aria-expanded="false">&#8943;</button>
+            <div class="panel-menu-pop" role="menu">
+              <a class="panel-menu-item" role="menuitem" href="customise.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>Customise feed</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vp-feed-wrap" id="vpFeedWrap">
+        <div class="vp-feed" id="vpFeed"></div>
+      </div>
+      <p class="vp-hidden-note">Vidiprinter collapsed while scores hidden.</p>
+      <div class="vp-footer">
+        <button class="vp-expand-btn" id="vpExpandBtn" type="button">Show full feed</button>
+      </div>
+    </div>
+  </section>
+  <!-- Accounts E3 (5 Aug 2026, Andy): prominent Sync devices entry point,
+       between the vidiprinter and Live Now. id kept so the existing handler
+       wires it; shown for everyone now sync is live. -->
+  <button type="button" id="sync-devices-btn" style="display:flex; align-items:center; gap:12px; width:100%; text-align:left; margin-bottom:48px; padding:14px 18px; background:transparent; border:1px solid var(--gold); border-radius:12px; cursor:pointer; color:var(--text);">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;"><rect x="2" y="3" width="14" height="10" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path><rect x="17" y="9" width="5" height="12" rx="1.5"></rect></svg>
+    <span style="display:flex; flex-direction:column; gap:2px; min-width:0;">
+      <span style="font-family:var(--font-display); font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--gold);">Sync your devices</span>
+      <span style="font-size:var(--small-size); color:var(--text-sub);">Keep your teams, favourites and settings in step across phone, tablet and desktop - no account needed.</span>
+    </span>
+  </button>
+  <section id="live-now-section" style="margin-bottom:48px;">
+    <div class="panel-head-row">
+      <button type="button" class="dash-section-toggle" id="live-now-toggle" aria-expanded="true" aria-controls="live-now-panel">
+        <svg class="dash-section-chevron" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        <span class="sub-label panel-heading" style="margin-bottom:0;">Live Now</span>
+      </button>
+      <div class="panel-menu">
+        <button type="button" class="panel-menu-btn" aria-label="Panel options" aria-haspopup="true" aria-expanded="false">&#8943;</button>
+        <div class="panel-menu-pop" role="menu">
+          <a class="panel-menu-item" role="menuitem" href="customise.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>Customise view</a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-panel dash-fixture-panel" id="live-now-panel">
+      <div id="live-now-list">
+        <p class="dash-empty">Loading...</p>
+      </div>
+    </div>
+  </section>
+  <section id="next12-section" style="margin-bottom:48px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:var(--space-sm); margin-bottom:12px; flex-wrap:wrap;">
+      <button type="button" class="dash-section-toggle" id="next12-toggle" aria-expanded="true" aria-controls="next12-panel" style="width:auto; flex:1; min-width:0; margin-bottom:0;">
+        <svg class="dash-section-chevron" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        <span class="sub-label panel-heading" id="next12-heading" style="margin-bottom:0;">Next 12 Hours</span>
+      </button>
+      <select id="next12-window-select" class="filter-select" style="width:auto;" aria-label="Choose fixture window">
+        <option value="12">Next 12h</option>
+        <option value="24">Next 24h</option>
+        <option value="48">Next 48h</option>
+      </select>
+      <div class="panel-menu">
+        <button type="button" class="panel-menu-btn" aria-label="Panel options" aria-haspopup="true" aria-expanded="false">&#8943;</button>
+        <div class="panel-menu-pop" role="menu">
+          <a class="panel-menu-item" role="menuitem" href="customise.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>Customise view</a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-panel dash-fixture-panel" id="next12-panel">
+      <div id="next12-list">
+        <p class="dash-empty">Loading...</p>
+      </div>
+    </div>
+  </section>
+  <!-- ── Session 18j: Recent Results panel ─────────────────────────
+       Backward-looking counterpart to Live Now / Next 12 Hours -
+       "what did I miss" rather than "what's happening / what's
+       next". Placed at the bottom, under Next 12 Hours, deliberately
+       keeping the vidiprinter next to Live Now rather than grouping
+       all three time-based panels together (Andy's call, 13 July
+       2026) - Live Now/Next 12 Hours/Recent Results don't read as
+       one continuous chronological run, vidiprinter stays the
+       always-on live ticker up top. Reuses buildPanelSelection() and
+       dashMatchCardHtml() exactly like the other two panels - same
+       candidate/highlight/priority-fill logic, same card markup, same
+       admin panel-visibility dial (20 July 2026 - replaced the old
+       baked-in qualifying exclusion; see isPanelEligibleFixture's
+       tombstone), just a different
+       fixtureTest (isRecentResult) and a descending sort so the most
+       recent result leads rather than the soonest upcoming one. -->
+  <section id="recent-results-section" style="margin-bottom:48px;">
+    <div class="panel-head-row">
+      <button type="button" class="dash-section-toggle" id="recent-results-toggle" aria-expanded="true" aria-controls="recent-results-panel">
+        <svg class="dash-section-chevron" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        <span class="sub-label panel-heading" style="margin-bottom:0;">Recent Results</span>
+      </button>
+      <div class="panel-menu">
+        <button type="button" class="panel-menu-btn" aria-label="Panel options" aria-haspopup="true" aria-expanded="false">&#8943;</button>
+        <div class="panel-menu-pop" role="menu">
+          <a class="panel-menu-item" role="menuitem" href="customise.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>Customise view</a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-panel dash-fixture-panel" id="recent-results-panel">
+      <div id="recent-results-list">
+        <p class="dash-empty">Loading...</p>
+      </div>
+    </div>
+  </section>
+  <section id="fav-teams-section" style="margin-bottom:48px;">
+    <div id="team-search-wrap" style="position:relative; max-width:420px;">
+      <input
+        type="text"
+        id="team-search-input"
+        placeholder="Add favourite teams..."
+        autocomplete="off"
+        style="width:100%; box-sizing:border-box; padding:10px 12px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-family:var(--font-body); font-size:16px;"
+      >
+      <div id="team-search-results" class="team-search-results"></div>
+      <div id="fav-pills-wrap" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:var(--space-sm);"></div>
+      <p id="fav-msg" style="color:var(--text-sub); font-size:var(--small-size); margin-top:6px;"></p>
+    </div>
+  </section>
+  <!-- ── My Teams panel ──────────────────────────────────────────
+       Session 18m: the favourites search box now lives INSIDE this
+       section's own heading row (#my-teams-search-slot) on desktop,
+       rather than up in the page header - moved here so it's visually
+       obvious the search is what populates this section (Andy's
+       request). That changes the visibility rule: this section can no
+       longer be hidden entirely until a team is highlighted, since the
+       search box living inside it is how you'd add your FIRST team -
+       hiding the whole thing would hide the only way in. So on
+       desktop the heading+search row always shows; only the grid body
+       below it toggles between the match-card grid and an empty-state
+       prompt, based on highlight count (see refreshMyTeamsPanel()).
+       On mobile, the favourites search stays in #fav-teams-section
+       (unchanged, relocateTeamSearch()'s mobile branch), so mobile
+       keeps its original behaviour: this whole section stays hidden
+       until at least one team is highlighted from up there. -->
+  <section id="my-teams-section" style="margin-bottom:48px;">
+    <div class="my-teams-heading-row" id="my-teams-heading-row">
+      <p class="sub-label panel-heading" style="margin-bottom:0;">My Teams</p>
+      <div id="my-teams-search-slot" class="my-teams-search-slot"></div>
+    </div>
+    <!-- Session D (27 July 2026): goal-alert opt-in, mounted by
+         ScorrPush.mountAlertsControl (js/push.js). Hidden on browsers with
+         no push support; on iOS Safari (not installed) it shows the
+         add-to-home-screen path instead of a dead toggle. -->
+    <div id="scorr-alerts-mount"></div>
+    <div class="dash-panel">
+      <div id="my-teams-list" class="my-teams-grid">
+        <p class="dash-empty">Loading...</p>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius); padding:var(--space-lg); margin-bottom:48px; box-shadow:var(--card-shadow);">
+    <h2 style="margin-bottom:8px;">Stay in the loop</h2>
+    <p style="color:var(--text-sub); margin-bottom:var(--space-md);">Get an email when new competitions and features go live. No spam, just the odd useful update.</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <input
+        type="email"
+        id="email-input-home"
+        placeholder="you@example.com"
+        style="flex:1; min-width:200px; padding:10px 12px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-family:var(--font-body); font-size:var(--body-size);"
+      >
+      <button
+        onclick="submitEmail('home')"
+        style="background:var(--gold); color:var(--on-gold); border:none; padding:10px 20px; border-radius:var(--radius-sm); font-family:var(--font-display); text-transform:uppercase; letter-spacing:1px; font-weight:700; font-size:13px; cursor:pointer;"
+      >Sign up</button>
+    </div>
+    <p id="signup-success-home" style="display:none; color:var(--success); margin-top:10px; font-size:var(--small-size);">Almost there - check your email to confirm.</p>
+  </section>
+  <footer style="text-align:center; color:var(--text-muted); font-size:var(--small-size); margin-top:40px;">
+    Made by <a href="https://kingdoggydog.github.io/" target="_blank" rel="noopener">u/coolcato</a> - <a href="about.html">About</a>
+  </footer>
+</div>
+<style>
+  .hero-wordmark {
+    color: var(--gold);
+    width: 220px;
+    flex-shrink: 0;
+  }
+  .hero-wordmark svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 480px) {
+    .hero-wordmark {
+      width: 150px;
+    }
+  }
+  /* ── Header right-hand cluster (Scores toggle, hamburger) ─────────
+     Session 18m: previously also held the favourites search box
+     (#header-search-slot) - that's moved down to sit beside the My
+     Teams heading instead (see .my-teams-heading-row/.my-teams-
+     search-slot below), now that the nav bar has its own separate
+     "Search teams" widget serving the top-of-page discovery role.
+     Just Scores toggle + hamburger left up here now. */
+  .header-right-cluster {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  /* ── Scores toggle: "SCORES" caption stacked above the Hide/Show
+     switch, matching the reference screenshot. Reuses core.js's
+     existing generic switch-wiring/initHideScores() wiring via the
+     same id="hide-scores-toggle" pattern competition.html's
+     controls-panel switch uses, so ScorrCore.init() (already running
+     on every page via core.js's own DOMContentLoaded listener) wires
+     this up with zero extra JS here. Also fixes a latent gap: without
+     a #hide-scores-toggle element present anywhere on the page,
+     wireSwitch() bailed out early and never applied the stored
+     scorr-hidescores preference to body.hide-scores on the dashboard
+     at all - a user who'd turned Hide Scores on from a competition
+     page previously still saw normal scores here regardless. The
+     caption (.switch-caption) already renders gold/bold/uppercase via
+     its existing theme.css rule, reused as-is rather than duplicated
+     here - only the grid layout needed overriding for the stacked
+     two-row shape and the toggle's own compact size. */
+  .header-scores-toggle.switch {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-areas:
+      "caption caption caption"
+      "left track right";
+    row-gap: 3px;
+    column-gap: 6px;
+    justify-items: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header-scores-toggle .switch-caption {
+    grid-area: caption;
+    margin-right: 0;
+  }
+  .header-scores-toggle .switch-label-left {
+    grid-area: left;
+  }
+  .header-scores-toggle .switch-track {
+    grid-area: track;
+    width: 32px;
+    height: 18px;
+  }
+  .header-scores-toggle .switch-track .switch-thumb {
+    width: 12px;
+    height: 12px;
+  }
+  .header-scores-toggle .switch-track.on .switch-thumb {
+    transform: translateX(14px);
+  }
+  .header-scores-toggle .switch-label-right {
+    grid-area: right;
+  }
+  .header-scores-toggle .switch-label {
+    font-size: 10px;
+  }
+  /* 26 July 2026 (Andy): on narrow screens the header share icon was clipping
+     into the SCORR wordmark. Shrink the Scores toggle + tighten the cluster gap
+     so the row fits without overlapping the logo. */
+  @media (max-width: 600px) {
+    .header-right-cluster { gap: 10px; }
+    .header-scores-toggle.switch { column-gap: 4px; row-gap: 2px; }
+    .header-scores-toggle .switch-caption { font-size: 9px; }
+    .header-scores-toggle .switch-label { font-size: 9px; }
+    .header-scores-toggle .switch-track { width: 26px; height: 15px; }
+    .header-scores-toggle .switch-track .switch-thumb { width: 11px; height: 11px; }
+    .header-scores-toggle .switch-track.on .switch-thumb { transform: translateX(11px); }
+  }
+  /* ── Session 18h vidiprinter styles: moved to css/vidiprinter.css
+     (20 July 2026) - shared with the standalone vidiprinter.html page.
+     Edit THERE, not here. */
+  /* ── Session 18m: nav bar "Search teams" quick-nav widget ─────────
+     Separate from the My Teams favourites search below - this one is
+     search-and-go (click a result, land straight on that team's
+     page), no highlight toggling, no pills, no state to keep in sync.
+     Two independent instances live in the DOM at once (desktop nav
+     row, mobile hamburger dropdown) rather than one physically-
+     relocated element like the favourites search uses - the two
+     containers have different layout needs (horizontal row vs
+     vertical stacked dropdown) and this widget carries no state that
+     would need to survive being moved between them, so two small
+     independent instances is simpler than relocation plumbing here. */
+  /* Session 25 (18 July 2026): nav team-search styles moved to theme.css (shared nav component). */
+  /* ── Session 18h: Your Teams favourites search ────────────────── */
+  .team-search-results {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--card-shadow);
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 50;
+    /* Firefox thin scrollbar matching theme instead of default chrome -
+       same rule as .nav-comp-menu, kept in sync intentionally. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-border) transparent;
+  }
+  .team-search-results::-webkit-scrollbar {
+    width: 6px;
+  }
+  .team-search-results::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .team-search-results::-webkit-scrollbar-thumb {
+    background: var(--gold-border);
+    border-radius: 3px;
+  }
+  .team-search-results.open {
+    display: block;
+  }
+  /* ── Session 18m Step (a): result row split into two distinct
+     actions ──────────────────────────────────────────────────────
+     Previously a single <button class="team-search-result"> did
+     double duty as the whole clickable row. Now each match renders
+     as a flex row (.team-search-result-row) containing the original
+     text button (unchanged - still toggles highlight/favourite on
+     click) plus a separate arrow button (.team-search-result-arrow)
+     that navigates to the team's dedicated page instead. Hover/active
+     tinting moved up to the row level so both children visually
+     belong to the same result, same .active class usage as before
+     (set by the keyboard-nav code, unaffected by this change). */
+  .team-search-result-row {
+    display: flex;
+    align-items: stretch;
+    /* A touch of breathing room on the right so the arrow sits away
+       from the dropdown's edge - defensive backup alongside the
+       input font-size fix above, which is the actual fix for the
+       iOS zoom-on-focus issue that was pushing the arrow partially
+       off-screen. */
+    padding-right: 4px;
+  }
+  .team-search-result-row:hover,
+  .team-search-result-row.active {
+    background: var(--gold-dim);
+  }
+  .team-search-result {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .team-search-result-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 42px;
+    background: none;
+    border: none;
+    border-left: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--gold);
+    cursor: pointer;
+  }
+  .team-search-result-arrow:hover {
+    background: var(--gold-dim);
+  }
+  .team-search-empty {
+    padding: 8px 12px;
+    color: var(--text-muted);
+    font-size: var(--small-size);
+  }
+  /* Session 18m Step (a) follow-up: highlight pills and My Teams
+     cards both got a second way into the team page, per Andy's
+     request - more entry points to the same destination, same
+     "click the name, not the whole control" pattern as the search
+     result row above. The pill's name portion is clickable (cursor
+     pointer via .highlight-pill below); the remove (x) stays a
+     separate target with its own stopPropagation so removing a
+     highlight never accidentally navigates away first. */
+  .highlight-pill {
+    cursor: pointer;
+  }
+  .highlight-pill-name:hover {
+    text-decoration: underline;
+  }
+  /* ── Session 18h: Live Now / Next 12 Hours dashboard cards ────────
+     Deliberately lighter-weight than competition.html's .match-row -
+     no event-card expand, no two-column stacked variant (dashboard is
+     mobile-first single column per the session brief). Cards also
+     carry the plain "match-row" class alongside "dash-match-row" so
+     they pick up theme.css's .match-row.highlight-1..4 tint/border
+     rules for free - those are the only theme.css rules keyed to
+     .match-row alone (base layout for .match-row lives in
+     competition.html's own <style>, not theme.css, so adding the
+     class here doesn't drag in anything unwanted). */
+  .dash-panel {
+    border: 1px solid var(--gold-border);
+    border-radius: var(--radius);
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    background: var(--bg);
+  }
+  .dash-panel .dash-match-row:first-child {
+    margin-top: var(--space-sm);
+  }
+  .dash-panel .dash-empty {
+    padding: var(--space-sm) 0 2px;
+    margin: 0;
+  }
+  .dash-match-row {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px var(--space-md);
+    margin-top: var(--space-sm);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, padding-right 0.15s ease;
+  }
+  .dash-match-row.is-live {
+    border-left: 3px solid var(--live);
+  }
+  /* Session 37 (19 July 2026): binary favourite marking - gold left
+     edge + bold name (Andy's pick), same treatment as the vidiprinter.
+     Declared BEFORE the is-live rule in the cascade? No - order here
+     matters less than the rule below: when a favourite's match is
+     LIVE, the green live edge deliberately WINS the border (live
+     status beats ownership) and the bold name still marks it yours. */
+  .dash-match-row.is-favourite {
+    border-left: 3px solid var(--gold);
+  }
+  .dash-match-row.is-live.is-favourite {
+    border-left: 3px solid var(--live);
+  }
+  .dash-team-name.fav-name {
+    font-weight: 700;
+  }
+  /* Session 37: favourite pills are binary gold - the coloured
+     highlight-pill-1..4 classes stay competition-page-only. */
+  .highlight-pill.favourite-pill {
+    background: var(--bg-elevated);
+    border: 1px solid var(--gold);
+  }
+  /* ── Event card preview (hover on desktop, tap on touch) ─────────
+     Mirrors competition.html's hover-to-expand behaviour. Desktop
+     (matchMedia 'hover: hover') keeps the original mouseenter/
+     mouseleave preview with full-card click-through to
+     competition.html, unchanged - see wireDashEventHover() below.
+     Session 18l: touch devices previously kept plain tap-to-navigate
+     here (no way to preview events without leaving the page) - now
+     tapping the card body toggles this same preview open/closed
+     instead, and a small explicit arrow (.dash-card-nav-arrow,
+     top-right, touch-only via CSS below) is the new "go to
+     competition page" affordance in its place. Only wired for
+     isEventCapable cards (EVENT_CARD_STATUSES) - not-started cards
+     have nothing to preview, so they're untouched and still navigate
+     on tap either way. */
+  .dash-match-row.events-open {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold-border), 0 0 14px var(--gold-dim);
+  }
+  /* Session 18l: explicit "go to competition page" affordance for
+     touch devices - see the comment above and wireDashEventHover() in
+     the script below. Hidden entirely on hover-capable devices, where
+     the full card is already the click-through and the arrow would
+     just be redundant clutter. .dash-match-row reserves 34px of right
+     padding only under the same media query, so the icon never
+     overlaps .dash-match-status regardless of row height - a fixed
+     top-offset icon alone can't guarantee that on its own since
+     .dash-match-status is vertically centred, not pinned to the row's
+     top edge. */
+  .dash-card-nav-arrow {
+    display: none;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    z-index: 2;
+  }
+  @media (hover: none) {
+    .dash-match-row {
+      padding-right: 34px;
+    }
+    .dash-card-nav-arrow {
+      display: flex;
+    }
+  }
+  /* Session 18l Part 3 (13 July 2026, Andy's correction - header
+     row reverted, not deployed): single inline row again, round
+     badge on the left before the teams, day+time back on the right
+     for not-started fixtures (replacing the old blank status slot
+     from Part 2). Alignment fix now comes from .dash-round-badge
+     having a genuinely FIXED width (not just a max-width cap) - see
+     that rule below - so it can never push the team block to a
+     different starting x-position card to card, without needing a
+     second row at all. */
+  .dash-match-main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .dash-match-row .match-events {
+    position: relative;
+    display: none;
+    margin-top: var(--space-xs);
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--border);
+    font-family: var(--font-body);
+  }
+  .dash-match-row.events-open .match-events {
+    display: block;
+  }
+  .dash-match-row .match-events::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: var(--space-xs);
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  .events-inner {
+    display: flex;
+    gap: var(--space-lg);
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .events-col {
+    flex: 1;
+    min-width: 0;
+  }
+  .events-col-home {
+    padding-right: var(--space-md);
+  }
+  .events-col-away {
+    padding-left: var(--space-md);
+  }
+  .events-col-away .event-item {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  .event-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 2px 0;
+    font-size: var(--small-size);
+    color: var(--text-sub);
+  }
+  .event-minute {
+    color: var(--gold);
+    font-weight: 700;
+    min-width: 30px;
+    flex-shrink: 0;
+  }
+  .event-icon {
+    min-width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .event-player {
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .event-player-goal {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  /* 18 July 2026 evening (Andy, mobile): the event preview rendered at
+     full desktop sizes on phones - player names ellipsed constantly
+     while competition.html's panel read fine. This is a straight port
+     of competition.html's own 480px event overrides, same values:
+     11px lines, tighter minute/icon slots, and the inner block goes
+     full-width instead of the 380px centred cap. Emoji icons (⚽/🟨/🟥)
+     scale with font-size, so the icon shrink rides the same rule. */
+  @media (max-width: 480px) {
+    .events-inner {
+      gap: var(--space-sm);
+      max-width: 100%;
+    }
+    .events-col-home {
+      padding-right: var(--space-sm);
+    }
+    .events-col-away {
+      padding-left: var(--space-sm);
+    }
+    .event-item {
+      font-size: 11px;
+      gap: 4px;
+    }
+    .event-minute {
+      min-width: 22px;
+    }
+    .event-icon {
+      min-width: 13px;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+  }
+  .match-events-loading,
+  .match-events-empty,
+  .match-events-error {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: var(--small-size);
+    padding: 3px 0;
+  }
+  /* Session 18l: replaces the old .dash-comp-badge (competition
+     abbreviation, e.g. "EPL") with a round/matchday badge instead -
+     the competition abbreviation was redundant once every card
+     already sits inside that competition's own accordion group
+     (crest + name on the group header, Session 18k), so repeating it
+     per card added nothing. Left-aligned (was right-aligned to suit
+     short fixed-width abbreviations - round labels vary a lot more
+     in length) with a max-width + ellipsis so a long fallback label
+     (see formatCardRoundBadge()) can't blow out the card layout. */
+  /* Session 18l Part 3: FIXED width (not min/max) - this is what
+     actually guarantees every card's team block starts at the same
+     x-position regardless of round text ("MD3" vs "SF" vs "R32" vs
+     blank). Abbreviated via formatCardRoundBadge()/
+     abbreviateRoundLabel() specifically to fit this width - ellipsis
+     remains as a safety net for the rare unrecognised round string
+     that's still too long. */
+  .dash-round-badge {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    width: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* 18 July 2026 (Andy): small left column that can stack a comp line
+     (short name, then crest) above the round badge - see the markup
+     comment in dashMatchCardHtml(). Andy's correction same evening:
+     the comp line shows ONLY inside .my-team-card (no accordion header
+     there to name the comp); on the panel cards it's display:none, so
+     those collapse back to the bare 36px round-badge column and 18l
+     Part 3's same-x-position guarantee is fully intact there.
+     max-width + ellipsis on the name stops a long comp ("Jupiler Pro
+     League") blowing out the narrow My Teams cards. */
+  .dash-badge-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    flex-shrink: 0;
+    min-width: 36px;
+  }
+  .dash-card-comp {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    max-width: 96px;
+    min-width: 0;
+  }
+  .my-team-card .dash-card-comp {
+    display: flex;
+  }
+  .dash-card-comp-crest {
+    /* 9 Aug 2026 (F3): 14px to match the team page's .team-match-comp-crest,
+       so the comp line is the same size wherever it appears. Was 12px. */
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .dash-card-comp-name {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dash-match-teams {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .dash-team-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dash-crest {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .dash-team-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .dash-team-score {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--gold);
+    flex-shrink: 0;
+    min-width: 16px;
+    text-align: right;
+  }
+  .agg-score {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+  .dash-match-status {
+    flex-shrink: 0;
+    min-width: 46px;
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-sub);
+  }
+  /* ── My Teams next-fixture card: stacked date/time (31 July 2026, Andy)
+     The long date used to sit on ONE non-shrinking line and crushed the
+     team names on a narrow card ("BG Path... v Aston..."). It now stacks:
+     date on the top line (level with the home team), time directly below
+     (level with the away team), time centred under the date, block still
+     pinned to the card's right. Only the My Teams next-fixture card
+     carries .dash-status-stacked - dashMatchCardHtml() adds it solely for
+     useLongDate NS cards - so every panel card and the Last Result row
+     are untouched. align-self:stretch + space-between line the two halves
+     up with the two team rows; this rides the same block at every width
+     (these cards are always narrow grid cells), so no media query. */
+  .dash-match-status.dash-status-stacked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;            /* time centred under the date */
+    justify-content: space-between; /* date -> home row, time -> away row */
+    align-self: stretch;
+    gap: 2px;
+    line-height: 1.15;
+    text-align: center;
+  }
+  .dash-status-stacked .dash-status-date,
+  .dash-status-stacked .dash-status-time {
+    white-space: nowrap;
+  }
+  /* ── Horizontal cards on desktop (18 July 2026, Andy's request) ──
+     The dashboard's panels are ALWAYS one column, so on desktop the
+     stacked home-over-away card leaves most of the row empty AND makes
+     the list twice as tall as it needs to be. From 768px up, the three
+     FIXTURE panels (Live Now / Next X Hours / Recent Results - scoped
+     via the dash-fixture-panel class on exactly those three divs)
+     rearrange the SAME markup into the competition-page shape: home
+     team packed against the centre from the left, away team from the
+     right, competition-style separator between the scores.
+     Deliberately CSS-only - no render-code changes, so the live-refresh
+     path and event-hover wiring are untouched. Deliberately NOT applied
+     to .my-team-card rows (they sit in the narrow My Teams grid and
+     keep the stack - Andy's call) or below 768px (mobile stack stays -
+     Andy likes it as-is). NOTE: body.layout-double (the nav layout
+     toggle) is IGNORED here on purpose - that toggle drives the
+     competition page's two-column #schedule grid only; the dashboard
+     has no two-column mode for these panels. */
+  @media (min-width: 768px) {
+    .dash-fixture-panel .dash-match-teams {
+      flex-direction: row;
+      align-items: center;
+      gap: 6px; /* matches .dash-team-row's own 6px gap so spacing around the separator is symmetric */
+    }
+    .dash-fixture-panel .dash-team-row {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+    /* home: [crest][name][score] packed rightwards against the centre */
+    .dash-fixture-panel .dash-team-row:first-child {
+      justify-content: flex-end;
+    }
+    /* away: row-reverse turns [crest][name][score] into a visual
+       [score][name][crest] - crests end up on the OUTER edges exactly
+       like competition.html. flex-end is the visual LEFT once the row
+       is reversed, so the away block also packs against the centre. */
+    .dash-fixture-panel .dash-team-row:last-child {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+    /* stacked mode stretches the name (flex:1) to push the score to the
+       card's right edge; horizontally the name must hug its text so the
+       score sits beside it. Ellipsis still works when space genuinely
+       runs out (flex-shrink stays 1, row keeps min-width:0). */
+    .dash-fixture-panel .dash-team-name {
+      flex: 0 1 auto;
+    }
+    /* away score: stacked mode right-aligns inside a 16px reservation
+       (column alignment); horizontally it packs against the separator
+       instead. Andy's fix (18 July evening): the aggregate bracket must
+       ALSO hug the dash, competition-style "0 (0) - (6) 3" - the away
+       span's inline content ("3 (6)" in the markup) flips via
+       inline-flex row-reverse so the bracket lands before the goals.
+       The score text becomes an anonymous flex item, so this works on
+       the unchanged markup; gap stands in for the markup's space, and
+       baseline alignment keeps the smaller agg-score font sitting on
+       the score's baseline like normal inline flow did. flex-end is
+       the visual LEFT in a reversed row = packed against the dash
+       (also covers the no-bracket case, same effect text-align:left
+       had before). */
+    .dash-fixture-panel .dash-team-row:last-child .dash-team-score {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 4px;
+    }
+    /* centre separator, competition-style: gold '-' between scores,
+       muted 'v' for fixtures with no score yet (mirrors
+       competition.html's scoreText fallback for upcoming matches) */
+    .dash-fixture-panel .dash-team-row:first-child::after {
+      content: '-';
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .dash-fixture-panel .dash-match-row[data-status="NS"] .dash-team-row:first-child::after,
+    .dash-fixture-panel .dash-match-row[data-status="TBD"] .dash-team-row:first-child::after,
+    .dash-fixture-panel .dash-match-row[data-status="PST"] .dash-team-row:first-child::after,
+    .dash-fixture-panel .dash-match-row[data-status="CANC"] .dash-team-row:first-child::after {
+      /* ruling #2 (20 Jul 2026): CANC joins the scoreless 'v' family now
+         that cancelled matches can reach Recent Results. ABD/AWD/WO keep
+         the '-' - they can carry a meaningful (partial/awarded) score. */
+      content: 'v';
+      color: var(--text-sub);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    /* scoreless fixtures render empty score spans that still reserve
+       16px each in stacked mode - horizontally that's just dead space
+       around the 'v', so collapse the reservation */
+    .dash-fixture-panel .dash-match-row[data-status="NS"] .dash-team-score,
+    .dash-fixture-panel .dash-match-row[data-status="TBD"] .dash-team-score,
+    .dash-fixture-panel .dash-match-row[data-status="PST"] .dash-team-score,
+    .dash-fixture-panel .dash-match-row[data-status="CANC"] .dash-team-score {
+      min-width: 0;
+    }
+    /* hide-scores spoiler mode: scores are visibility:hidden (box kept,
+       fine for the stacked columns) - horizontally the kept boxes pad
+       the separator apart, so remove them entirely; the card reads as
+       a clean "Home - Away". The second selector deliberately repeats
+       the away-score rule's full chain: the agg-flip rule above is
+       (0,4,0) specific, which would beat a plain (0,3,1) hide rule and
+       resurrect away scores in hide-scores mode. */
+    body.hide-scores .dash-fixture-panel .dash-team-score,
+    body.hide-scores .dash-fixture-panel .dash-team-row:last-child .dash-team-score {
+      display: none;
+    }
+  }
+  .dash-empty {
+    color: var(--text-sub);
+    font-size: var(--body-size);
+  }
+  /* ── Session 18j: per-competition accordion groups ──────────────
+     Wraps each competition's cards inside Live Now / Next 12 Hours /
+     Recent Results. Chevron mirrors the existing nav-comp-country-
+     toggle rotate pattern, just inverted: default state here is
+     EXPANDED (rotate 90deg, pointing down), collapsed is the
+     resting/un-rotated position (pointing right) - opposite of the
+     nav dropdown, which defaults to collapsed. */
+  .dash-group {
+    margin-top: var(--space-sm);
+  }
+  .dash-panel .dash-group:first-child {
+    margin-top: var(--space-sm);
+  }
+  .dash-group-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 6px 4px;
+    cursor: pointer;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: var(--small-size);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+  }
+  .dash-group-toggle:hover {
+    color: var(--gold);
+  }
+  .dash-group-chevron {
+    color: var(--gold);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+    transform: rotate(90deg);
+  }
+  .dash-group.collapsed .dash-group-chevron {
+    transform: rotate(0deg);
+  }
+  /* Session 18k: competition crest next to the accordion group name.
+     Sourced directly from the same fixture data each panel already
+     fetched to build its cards (api-sports.io embeds league.logo on
+     every fixture object) - no extra request needed. Sized to sit
+     comfortably next to the uppercase, letter-spaced label text
+     without dominating it; onerror hides it gracefully for the rare
+     competition with no logo on file rather than showing a broken
+     image icon. */
+  /* Session 18k Part 2: two-level accordion (country -> competition).
+     .dash-group-flag sits on the country-level toggle, mirroring
+     .dash-group-crest's sizing/onerror pattern but wider/shorter to
+     match flag image proportions rather than square logos.
+     .dash-group-comp indents nested competition groups slightly so the
+     hierarchy reads visually without needing a second chevron style. */
+  .dash-group-flag {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .dash-group-comp {
+    margin-left: 18px;
+  }
+  .dash-group-crest {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .dash-group-label {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dash-group-count {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .dash-group-body {
+    display: block;
+  }
+  .dash-group.collapsed .dash-group-body {
+    display: none;
+  }
+  /* ── P1a (26 July 2026): favourite-competition star ─────────────────
+     The star sits INSIDE the competition-group toggle, right after the
+     competition name (Andy: next to the name, not the far right). The label
+     hugs its content so the star follows it; the match count is pushed to
+     the far right. Only competition-level groups get a star; country-level
+     and the pinned Favourite comps headers use .dash-group-fav-icon. */
+  .dash-group-comp .dash-group-toggle .dash-group-label {
+    flex: 0 1 auto;
+  }
+  .dash-group-comp .dash-group-toggle .dash-group-count {
+    margin-left: auto;
+    padding-left: 6px;
+  }
+  .dash-fav-star {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--gold);
+    line-height: 0;
+    border-radius: 4px;
+  }
+  .dash-fav-star svg {
+    fill: none;
+    stroke: var(--gold);
+    transition: fill 0.12s ease;
+  }
+  .dash-fav-star.is-fav svg {
+    fill: var(--gold);
+  }
+  .dash-fav-star:hover svg {
+    fill: var(--gold-dim, rgba(201,168,76,0.35));
+  }
+  .dash-fav-star.is-fav:hover svg {
+    fill: var(--gold);
+    opacity: 0.85;
+  }
+  .dash-fav-star:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+  /* The gold star icon on the pinned "Favourite comps" section header
+     (sits where a country flag would). */
+  .dash-group-fav-icon {
+    flex-shrink: 0;
+    fill: var(--gold);
+    stroke: var(--gold);
+    stroke-width: 1.2;
+  }
+  /* Hide Scores support for dashboard cards. Same pattern as the
+     Session 18g fix for competition.html's stacked two-column card:
+     each team renders as its own row with its own score (not one
+     shared score slot between two teams), so hiding is just
+     visibility:hidden per score, no "v" placeholder needed the way
+     single-column match rows use. .dash-match-status is reused for
+     BOTH the kickoff time (NS fixtures) and the live/finished status
+     badge - only the badge case should hide, so this is scoped to
+     .is-live or a finished data-status, same guard as the
+     competition.html fix, not a plain kickoff-time row. */
+  body.hide-scores .dash-team-score {
+    visibility: hidden;
+  }
+  body.hide-scores .dash-match-row.is-live .dash-match-status,
+  body.hide-scores .dash-match-row[data-status="FT"] .dash-match-status,
+  body.hide-scores .dash-match-row[data-status="AET"] .dash-match-status,
+  body.hide-scores .dash-match-row[data-status="PEN"] .dash-match-status {
+    visibility: hidden;
+  }
+  /* Session 18l Part 10 (13 July 2026, Andy's request): whole-section
+     collapse for Live Now / Next X Hours / Recent Results - separate
+     from the existing per-competition/per-country accordion collapse
+     inside each panel (.dash-group), this collapses the ENTIRE
+     section (heading + panel) in one action. Reuses the same visual
+     chevron language as .dash-group-chevron/.accordion-chevron
+     elsewhere on the site (default state expanded, rotate 90deg;
+     collapsed is the resting un-rotated position) for consistency,
+     but is otherwise a separate, independent piece of state - see
+     SECTION_COLLAPSE_KEY in the script below, distinct from
+     GROUP_COLLAPSE_KEY. .panel-heading's own gold/bold styling
+     (defined further down) is preserved as-is since it's still
+     applied via the same classes on the inner <span> - this button
+     is purely a layout/interaction wrapper, not a restyle. Not
+     applied to the vidiprinter or My Teams - Andy's request was
+     specifically for these three panels. */
+  .dash-section-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 12px;
+    cursor: pointer;
+    text-align: left;
+  }
+  .dash-section-chevron {
+    color: var(--gold);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+    transform: rotate(90deg);
+  }
+  .dash-section-toggle.collapsed .dash-section-chevron {
+    transform: rotate(0deg);
+  }
+  /* Live Now / Next 12 Hours / My Teams headings - gold and bolder
+     than the base .sub-label style (used elsewhere on this page for
+     the tagline etc, deliberately left unchanged), per Andy's
+     request. Scoped to this added class rather than touching the
+     shared .sub-label rule in theme.css. */
+  .panel-heading {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  /* ── Slice 3: per-panel "..." options menu ────────────────────────
+     A small ellipsis button in each fixture panel's heading row
+     (Live Now / Next 12 Hours / Recent Results - the three panels the
+     customise page actually governs). Opens a lightweight popover with
+     a single "Customise view" link to customise.html; structured to
+     hold more items later. Shared, delegated open/close JS below
+     (click-outside + Escape). Not added to My Teams (favourites-driven,
+     not controlled by the customise settings) or the vidiprinter. */
+  .panel-head-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .panel-head-row .dash-section-toggle {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+  .panel-menu { position: relative; flex-shrink: 0; }
+  .panel-menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    line-height: 1;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .panel-menu-btn:hover,
+  .panel-menu-btn[aria-expanded="true"] {
+    color: var(--gold);
+    background: var(--bg-elevated);
+  }
+  .panel-menu-pop {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--card-shadow);
+    min-width: 180px;
+    z-index: 50;
+    padding: 4px;
+    display: none;
+  }
+  .panel-menu-pop.open { display: block; }
+  .panel-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    background: none;
+    border: none;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+  }
+  .panel-menu-item:hover { background: var(--bg-surface); color: var(--gold); }
+  .panel-menu-item svg { flex-shrink: 0; color: var(--gold); }
+  /* ── Slice 3: "What's New" announcement bar above the goal feed ────
+     Dismissible per device (localStorage). Gold "What's New:" tag, then
+     the message in body text with a gold left accent. */
+  .whats-new-bar {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: var(--body-size);
+    line-height: 1.5;
+    box-shadow: var(--card-shadow);
+  }
+  .whats-new-stack { margin-bottom: 20px; }
+  .whats-new-bar .wn-tag { color: var(--gold); font-weight: 700; }
+  .whats-new-bar .wn-body { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+  .whats-new-bar .wn-head { color: var(--text-sub); }
+  .whats-new-bar .wn-list { margin: 0; padding-left: 20px; color: var(--text); }
+  .whats-new-bar .wn-list li { margin: 3px 0; padding-left: 2px; }
+  .whats-new-bar .wn-list strong { color: var(--text); }
+  .whats-new-bar .wn-text { color: var(--text); }
+  .whats-new-bar .wn-text strong { color: var(--text); }
+  .whats-new-bar .wn-next { color: var(--gold); font-weight: 700; }
+  .whats-new-bar .wn-dots { color: var(--gold); font-weight: 700; letter-spacing: 1px; }
+  .whats-new-bar .wn-close {
+    margin-left: auto;
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0 2px;
+    flex-shrink: 0;
+  }
+  .whats-new-bar .wn-close:hover { color: var(--gold); }
+  /* ── Session 18m: My Teams heading row + search slot ──────────────
+     Desktop home for #team-search-wrap - relocateTeamSearch() moves
+     the same physical element here on wide viewports, same "move the
+     real element, don't duplicate it" pattern used elsewhere on this
+     site. Hidden outright below 600px since the favourites search
+     lives in #fav-teams-section on mobile instead (unchanged). */
+  .my-teams-heading-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    margin-bottom: 12px;
+  }
+  .my-teams-search-slot {
+    display: flex;
+    align-items: center;
+    width: 320px;
+    max-width: 100%;
+  }
+  .my-teams-search-slot #team-search-wrap {
+    width: 100%;
+    max-width: none;
+  }
+  @media (max-width: 600px) {
+    .my-teams-search-slot {
+      display: none;
+    }
+  }
+  .my-teams-section-empty {
+    padding: var(--space-sm) 0;
+  }
+  /* ── Session (World Cup follow-up, Part 3): My Teams panel ────────
+     Each highlighted team gets its own card: Last Result + Next
+     Fixture, each rendered with the same .dash-match-row markup the
+     Live Now / Next 12 Hours panels already use (via
+     dashMatchCardHtml() reused directly), so the match cards
+     themselves are visually identical to the rest of the dashboard.
+     Cards sit in a responsive grid - single column on mobile (matches
+     every other mobile-first dashboard panel), two columns from
+     640px up purely as a compaction for up to 4 simultaneous team
+     cards; not a hard requirement from the session brief, just avoids
+     a very long single column when someone has all 4 slots filled. */
+  .my-teams-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+  }
+  @media (min-width: 640px) {
+    .my-teams-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .my-team-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    background: var(--bg-surface);
+  }
+  .my-team-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .my-team-heading:hover .my-team-name {
+    text-decoration: underline;
+  }
+  .my-team-crest {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .my-team-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .my-team-sublabel {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: var(--space-sm) 0 2px;
+  }
+  .my-team-card .dash-match-row {
+    margin-top: 0;
+  }
+  .my-team-empty {
+    font-size: var(--small-size);
+    padding: 4px 0;
+    margin: 0;
+  }
+  /* Polish bundle (3 Aug 2026): My Teams next-fixture card fits the
+     narrow end. The card's fixed columns (comp label + stacked date)
+     plus two full team names overflowed a 320px cell by ~19px because
+     the grid track and the card's flex row both refused to shrink below
+     their min-content, so the names never ellipsised. GATED BELOW 360px
+     so 360px+ is byte-identical to today: only here the grid track may
+     shrink (minmax 0), the card's flex row may shrink (min-width:0), the
+     comp label is capped tighter and the gaps/label reserve trimmed - so
+     BOTH names ellipsise EQUALLY (same flex basis) instead of the card
+     blowing out. Nothing else about the card changes. */
+  @media (max-width: 359px) {
+    .my-teams-grid { grid-template-columns: minmax(0, 1fr); }
+    .my-team-card .dash-match-main { min-width: 0; gap: 5px; }
+    .my-team-card .dash-badge-col { min-width: 30px; }
+    .my-team-card .dash-card-comp { max-width: 44px; }
+    .my-team-card .dash-round-badge { width: 30px; }
+    .my-team-card .dash-match-status { min-width: 0; }
+    .my-team-card .dash-team-row { gap: 4px; }
+    .my-team-card .dash-crest { width: 15px; height: 15px; }
+  }
+</style>
+<script>
+  // Session 25: nav wiring (toggles, dropdown, team search) moved to ScorrCore.injectSiteNav() in js/core.js.
+  var WORKER_URL = 'https://scores-worker.aking116.workers.dev';
+  // Kit (ConvertKit) subscribe endpoint (20 July 2026 - replaced the Google Form signup).
+  // Custom input posts email_address to the embedded form's URL; no-cors fire-and-forget.
+  const KIT_SUBSCRIBE_URL = 'https://app.kit.com/forms/9708248/subscriptions';
+  function submitEmail(suffix) {
+    const input = document.getElementById('email-input-' + suffix);
+    const success = document.getElementById('signup-success-' + suffix);
+    if (!input) return;
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      input.style.border = '1px solid var(--danger)';
+      return;
+    }
+    input.style.border = '';
+    fetch(KIT_SUBSCRIBE_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'email_address=' + encodeURIComponent(email)
+    }).then(() => {
+      if (success) {
+        if (success.dataset.orig) success.textContent = success.dataset.orig; // restore after an earlier failure message
+        success.style.display = 'block';
+      }
+      input.value = '';
+    }).catch(() => {
+      // Audit B (20 July 2026): failures used to vanish - the user hit
+      // Enter, nothing happened, address silently not captured. no-cors
+      // means we can't see HTTP status, but a network-level failure DOES
+      // reject - show it instead of eating it.
+      input.style.border = '1px solid var(--danger)';
+      if (success) {
+        if (!success.dataset.orig) success.dataset.orig = success.textContent;
+        success.style.display = 'block';
+        success.textContent = "Couldn't reach the signup service - please try again.";
+      }
+    });
+  }
+  document.getElementById('email-input-home').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitEmail('home');
+  });
+  // Session 18m: the real implementation now lives in
+  // js/team-fixtures.js (window.ScorrFixtures), shared with
+  // team.html - this stays as a thin wrapper so every existing call
+  // site in this file (loadAllCompetitionFixtures().then(...), used
+  // throughout Live Now / Next 12 Hours / Recent Results / My Teams)
+  // needed zero changes.
+  function loadAllCompetitionFixtures() {
+    return window.ScorrFixtures.loadAllCompetitionFixtures();
+  }
+  // Session 18m: the real implementation now lives in
+  // js/team-fixtures.js (window.ScorrFixtures), shared with the new
+  // nav-bar "Search teams" widget on every page - thin wrapper here,
+  // same reason as loadAllCompetitionFixtures() etc above.
+  function buildTeamIndex() {
+    return window.ScorrFixtures.buildTeamIndex();
+  }
+
+  function renderFavPills() {
+    var wrap = document.getElementById('fav-pills-wrap');
+    var msg = document.getElementById('fav-msg');
+    if (!wrap || !msg) return;
+    wrap.innerHTML = '';
+    // Session 37 (19 July 2026): FAVOURITES, not highlights - unlimited,
+    // binary gold pills (no per-team colours; the name is on the pill).
+    // Competition-page highlights are a separate, untouched concept.
+    var favourites = ScorrCore.getFavourites();
+    favourites.forEach(function (team) {
+      var pill = document.createElement('span');
+      pill.className = 'highlight-pill favourite-pill';
+      pill.innerHTML = '<span class="highlight-pill-name">' + ScorrCore.esc(team) + '</span> <span class="highlight-pill-remove" data-team="' + ScorrCore.esc(team) + '">&times;</span>';
+      pill.addEventListener('click', function (e) {
+        if (e.target.closest('.highlight-pill-remove')) return;
+        window.location.href = 'team.html?team=' + encodeURIComponent(team);
+      });
+      wrap.appendChild(pill);
+    });
+    if (favourites.length === 0) {
+      msg.textContent = 'No teams picked yet.';
+    } else {
+      msg.textContent = '';
+    }
+    wrap.querySelectorAll('.highlight-pill-remove').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        // Session 18m Step (a) follow-up: stop this bubbling up to the
+        // pill's own click listener (added above), which navigates to
+        // team.html - removing a highlight should never also trigger
+        // a navigation.
+        e.stopPropagation();
+        ScorrCore.toggleFavourite(btn.dataset.team); // Session 37: favourites store
+        renderFavPills();
+        // Session (World Cup follow-up, Part 3): removing a team
+        // should drop its card from My Teams immediately, not wait
+        // for the next 60s refresh - re-render from the already-
+        // fetched fixture data rather than triggering a full refetch.
+        refreshMyTeamsPanelFromCache();
+      });
+    });
+  }
+  // Session 18m Step (a): each match now renders as a two-part row -
+  // the original text button (row click, toggles highlight, unchanged
+  // behaviour) plus a separate arrow button that navigates to the
+  // team's dedicated cross-competition page. Kept as two independent
+  // elements rather than one element with two click zones so the two
+  // actions can never be ambiguous to a screen reader or a fat-finger
+  // tap - same "two distinct actions on one row" pattern as the
+  // Session 18l dashboard card nav arrow.
+  function initTeamSearch() {
+    var input = document.getElementById('team-search-input');
+    var results = document.getElementById('team-search-results');
+    if (!input || !results) return;
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      if (!q) {
+        results.classList.remove('open');
+        results.innerHTML = '';
+        return;
+      }
+      buildTeamIndex().then(function (teams) {
+        var current = ScorrCore.getFavourites(); // Session 37
+        var matches = teams.filter(function (t) {
+          return t.toLowerCase().indexOf(q) !== -1;
+        }).slice(0, 8);
+        results.innerHTML = '';
+        if (!matches.length) {
+          results.innerHTML = '<div class="team-search-empty">No teams found.</div>';
+        } else {
+          matches.forEach(function (team) {
+            var row = document.createElement('div');
+            row.className = 'team-search-result-row';
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'team-search-result';
+            var already = current.indexOf(team) !== -1;
+            btn.textContent = team + (already ? ' \u2713' : '');
+            btn.addEventListener('click', function () {
+              // Session 37: favourites are UNLIMITED - the old 4-team
+              // cap belongs to competition-page highlights only.
+              ScorrCore.toggleFavourite(team);
+              renderFavPills();
+              // Session (World Cup follow-up, Part 3): same as the
+              // pill-remove handler above - reflect the new highlight
+              // in My Teams immediately using cached fixture data.
+              refreshMyTeamsPanelFromCache();
+              input.value = '';
+              results.classList.remove('open');
+              results.innerHTML = '';
+            });
+            // Session 18m Step (a): explicit "go to team page" action -
+            // separate from the row click above, which only toggles
+            // highlight. Reuses the same chevron SVG/visual language as
+            // the Session 18l dashboard card nav arrow and the nav
+            // accordion chevron. stopPropagation() isn't strictly needed
+            // since this is a sibling of btn rather than nested inside
+            // it, but kept as a defensive guard in case the row markup
+            // changes later and something wraps both in one clickable
+            // container.
+            var arrow = document.createElement('button');
+            arrow.type = 'button';
+            arrow.className = 'team-search-result-arrow';
+            arrow.setAttribute('aria-label', 'Go to ' + team + ' team page');
+            arrow.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg>';
+            arrow.addEventListener('click', function (e) {
+              e.stopPropagation();
+              window.location.href = 'team.html?team=' + encodeURIComponent(team);
+            });
+            row.appendChild(btn);
+            row.appendChild(arrow);
+            results.appendChild(row);
+          });
+        }
+        results.classList.add('open');
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#team-search-wrap')) {
+        results.classList.remove('open');
+      }
+    });
+  }
+  // Session 18h: physically moves the SAME #team-search-wrap element
+  // between two homes depending on viewport width - same pattern as
+  // competition.html's relocateCalendarButton(). Session 18m: desktop
+  // target changed from the page header to #my-teams-search-slot
+  // (beside the My Teams heading), per Andy's request to make the
+  // link between the search and My Teams obvious. Below 600px it
+  // still moves back into #fav-teams-section, its original position -
+  // mobile behaviour is unchanged. The pills (#fav-pills-wrap) and
+  // message (#fav-msg) are nested INSIDE #team-search-wrap, so they
+  // travel automatically with it wherever it goes; no separate
+  // pills-relocation logic needed.
+  function relocateTeamSearch() {
+    var searchWrap = document.getElementById('team-search-wrap');
+    var myTeamsSlot = document.getElementById('my-teams-search-slot');
+    var mobileSection = document.getElementById('fav-teams-section');
+    if (!searchWrap || !myTeamsSlot || !mobileSection) return;
+    if (window.innerWidth > 600) {
+      if (searchWrap.parentElement !== myTeamsSlot) {
+        myTeamsSlot.appendChild(searchWrap);
+      }
+      mobileSection.style.display = 'none';
+      // The element carries an inline max-width:420px from its
+      // original markup - inline styles always win over stylesheet
+      // rules regardless of selector specificity, so a CSS rule
+      // targeting it here would silently lose. Overriding the inline
+      // style directly via JS instead of fighting it with CSS.
+      searchWrap.style.maxWidth = '100%';
+    } else {
+      if (searchWrap.parentElement !== mobileSection) {
+        mobileSection.appendChild(searchWrap);
+      }
+      mobileSection.style.display = '';
+      searchWrap.style.maxWidth = '420px';
+    }
+    // Crossing the breakpoint changes whether My Teams should be
+    // visible-but-empty (desktop) or hidden-until-populated (mobile) -
+    // re-run the same visibility decision refreshMyTeamsPanel() makes
+    // on every normal refresh, using whatever fixture data is already
+    // cached rather than waiting for the next 60s tick.
+    // Audit B (20 July 2026): ONLY when the breakpoint actually
+    // crosses. This handler fires on every resize event - including
+    // iOS's URL-bar collapse while scrolling - and used to rebuild the
+    // whole My Teams panel each time (jank, and it compounded the
+    // panel-close bug fixed above). Same-side resizes now skip.
+    var isDesktopNow = window.innerWidth > 600;
+    if (lastSearchLayoutDesktop !== isDesktopNow) {
+      lastSearchLayoutDesktop = isDesktopNow;
+      refreshMyTeamsPanelFromCache();
+    }
+  }
+  var lastSearchLayoutDesktop = null;
+  // ── Session 18h: Live Now / Next 12 Hours panels ─────────────────
+  // Decided with Andy 11-12 July 2026 (AMENDED 20 July 2026):
+  //   - the original baked-in FA Cup / League Cup qualifying exclusion
+  //     is GONE ("panels hide nothing") - noise control is now the
+  //     admin panel-visibility dial in the tick-state editor (per-comp
+  //     Off / "From: round"), enforced in buildPanelSelection below.
+  //   - a competition is only a CANDIDATE for a panel if it actually
+  //     has an eligible fixture right now (live, or kicking off within
+  //     the next 12 hours) - Championship doesn't show in Live Now
+  //     just because it exists, it has to have a live match.
+  //   - every competition containing a highlighted team's eligible
+  //     fixture is ALWAYS shown, however many that ends up being -
+  //     never truncated to fit a cap (Andy's call). This is also what
+  //     makes a knocked-out favourite team silently stop pulling in
+  //     that competition with no extra "detect elimination" logic:
+  //     once there's no future fixture for them there, there's no
+  //     eligible fixture, so the competition was never a candidate.
+  //   - remaining slots are filled up to a MINIMUM of 4 total
+  //     competitions using the highest-priority eligible competitions
+  //     not already included (alphabetical tiebreak for equal
+  //     priority, e.g. Bundesliga vs Serie A both at 3).
+  //   - highlighted teams' matches float to the top of the whole
+  //     bucket regardless of competition, per Section 11.6.
+  // 18 July 2026 (Andy's MLS report - live match missing from BOTH
+  // panels): SUSP, INT and LIVE added - the same audit-F-M2 gap the
+  // fetcher and competition.html closed on 16 July, never applied
+  // here (drift). api-sports uses LIVE for "in play, detailed data
+  // temporarily lagging" - most common in the first minutes of a
+  // kickoff in lower-coverage comps (exactly Andy's MLS case). A
+  // fixture in any of these is not NS either, so before this it
+  // vanished from Live Now AND Next X Hours entirely.
+  var LIVE_STATUSES = ScorrCore.LIVE_STATUSES; // Consolidation 1 (20 July 2026): the one list, in core.js
+  // Session 18k Part 2: Next 12 Hours' window is now user-selectable
+  // (12/24/48h) via the dropdown next to its heading, rather than a
+  // fixed constant. Persisted the same way Hide Scores and the
+  // accordion collapse state already are - localStorage, graceful
+  // fallback to the default if unavailable or the stored value isn't
+  // one of the offered options (e.g. a stale value from a future
+  // change to NEXT_WINDOW_OPTIONS). No extra fetch needed to change
+  // the window: the data already covers every browsable competition's
+  // full upcoming fixture list, so widening or narrowing the window is
+  // purely a client-side filter change - see the select's change
+  // handler further down, which re-renders from lastFixtureEntries
+  // (already cached for the My Teams panel) instead of refetching.
+  var NEXT_WINDOW_STORAGE_KEY = 'scorr-next-window-hours';
+  var NEXT_WINDOW_OPTIONS = [12, 24, 48];
+  var DEFAULT_NEXT_WINDOW_HOURS = 12;
+  // Audit B (20 July 2026): cached - this used to hit localStorage once
+  // PER FIXTURE PER SWEEP (isInNextWindow calls it in a filter).
+  // setNextWindowHours invalidates on change.
+  var cachedNextWindowHours = null;
+  function getNextWindowHours() {
+    if (cachedNextWindowHours !== null) return cachedNextWindowHours;
+    try {
+      var raw = localStorage.getItem(NEXT_WINDOW_STORAGE_KEY);
+      var parsed = raw ? parseInt(raw, 10) : DEFAULT_NEXT_WINDOW_HOURS;
+      cachedNextWindowHours = NEXT_WINDOW_OPTIONS.indexOf(parsed) !== -1 ? parsed : DEFAULT_NEXT_WINDOW_HOURS;
+    } catch (e) {
+      cachedNextWindowHours = DEFAULT_NEXT_WINDOW_HOURS;
+    }
+    return cachedNextWindowHours;
+  }
+  function setNextWindowHours(hours) {
+    cachedNextWindowHours = null; // Audit B: invalidate the read cache
+    try {
+      localStorage.setItem(NEXT_WINDOW_STORAGE_KEY, String(hours));
+    } catch (e) {
+      // localStorage unavailable - selection just won't persist this
+      // session, same graceful fallback used elsewhere on this page.
+    }
+  }
+  // Session 25 (Decision B): MIN_PANEL_COMPETITIONS retired - the cap
+  // on panel competitions is gone (presence -> expansion state). The
+  // "never show an empty-looking dashboard" job moved to
+  // computeCompDefaults()'s top-2-by-priority floor.
+  // Session 18j: Recent Results lookback - double Next 12 Hours' window,
+  // same rolling-window style (not a calendar-day boundary) rather than
+  // "since midnight" or similar, for consistency with how Next 12 Hours
+  // already works. Wide enough to catch a full evening's matches if the
+  // dashboard's checked the next morning, without surfacing genuinely
+  // old results. Andy confirmed 13 July 2026.
+  var RECENT_RESULTS_WINDOW_HOURS = 24;
+  // Hidden-things ruling #2 (20 July 2026, Andy): PST/CANC/ABD/AWD/WO
+  // outcomes join the finished statuses here - a postponed or abandoned
+  // match inside the lookback window is an OUTCOME the dashboard was
+  // silently eating ("what happened to that match" had no answer on the
+  // one page meant to answer it). They render with readable status
+  // badges via ScorrCore.statusInfo and the existing 'v' separator CSS.
+  var RECENT_RESULT_STATUSES = ScorrCore.FINISHED_STATUSES.concat(['PST', 'CANC', 'ABD', 'AWD', 'WO']);
+  // ── Session 18j: per-competition accordion groups within Live Now /
+  // Next 12 Hours / Recent Results ──────────────────────────────
+  // Keyed by groupId (e.g. "epl"), NOT the season-specific config id
+  // (e.g. "epl-2627") - config ids change every season, so keying on
+  // those would silently forget the preference the moment a season
+  // rolls over. groupId is stable across seasons, which is what makes
+  // "remembers forever" actually mean forever.
+  // Shape in localStorage: { "live-now": ["epl", "allsvenskan"],
+  // "next12": [...], "recent-results": [...] } - each panel tracks its
+  // own independent list of COLLAPSED groupIds (not expanded ones), so
+  // a brand new competition Andy adds later defaults to expanded
+  // everywhere with zero migration needed - it simply won't appear in
+  // any panel's list yet. Dashboard-only feature (these three panels
+  // only exist on index-dev.html), so this lives here rather than in
+  // core.js alongside the site-wide preferences (highlights, hide-
+  // scores, etc) that every page needs.
+  var GROUP_COLLAPSE_KEY = 'scorr-group-collapse';
+  // Session 25 (Decision B, built 18 July 2026): the persistence model
+  // is REWRITTEN from "list of collapsed ids" to explicit tri-state:
+  //   { panelId: { groupId: true|false } }
+  // true = user collapsed it, false = user EXPANDED it, absent = use
+  // the computed default. The old list-only shape could not survive
+  // computed defaults: once "collapsed" became a possible DEFAULT,
+  // storing only collapses meant a user's expansions vanished on
+  // refresh - silent, infuriating, invisible in testing because
+  // nobody refreshes. Any user toggle now writes an explicit entry
+  // that wins permanently, per panel, independently across the three
+  // panels.
+  // MIGRATION (confirmed against the old shape, not assumed): the old
+  // format stored arrays of collapsed ids - an array entry meant
+  // "collapsed", which is still true under the new model, so arrays
+  // convert to { id: true } lazily on read. Nothing is lost; old
+  // expansions were never stored, so there is nothing to migrate for
+  // them.
+  function getGroupCollapseState() {
+    try {
+      var raw = localStorage.getItem(GROUP_COLLAPSE_KEY);
+      var parsed = raw ? JSON.parse(raw) : {};
+      if (!parsed || typeof parsed !== 'object') return {};
+      Object.keys(parsed).forEach(function (panelId) {
+        if (Array.isArray(parsed[panelId])) {
+          var map = {};
+          parsed[panelId].forEach(function (id) { map[id] = true; });
+          parsed[panelId] = map;
+        }
+      });
+      return parsed;
+    } catch (e) {
+      return {};
+    }
+  }
+  // Returns true (user collapsed), false (user expanded) or undefined
+  // (never touched - caller applies the computed default).
+  function getStoredGroupCollapsed(panelId, groupId) {
+    var state = getGroupCollapseState();
+    var panel = state[panelId];
+    if (panel && typeof panel === 'object' && Object.prototype.hasOwnProperty.call(panel, groupId)) {
+      return panel[groupId] === true;
+    }
+    return undefined;
+  }
+  function isGroupCollapsed(panelId, groupId, computedDefault) {
+    var stored = getStoredGroupCollapsed(panelId, groupId);
+    if (stored !== undefined) return stored;
+    return computedDefault === undefined ? false : computedDefault;
+  }
+  function setGroupCollapsed(panelId, groupId, collapsed) {
+    var state = getGroupCollapseState();
+    var panel = (state[panelId] && !Array.isArray(state[panelId])) ? state[panelId] : {};
+    panel[groupId] = collapsed === true; // explicit true/false - both states persist
+    state[panelId] = panel;
+    try {
+      localStorage.setItem(GROUP_COLLAPSE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // localStorage unavailable - collapse state just won't persist
+      // this session, same graceful fallback as setHighlights() in
+      // core.js.
+    }
+  }
+
+  // ── 24 July 2026 (Andy): scope the favourite-team "to the top" boost ──
+  // The boost (a favourite team's match auto-expands its comp AND floats
+  // that comp/match above higher-priority ones in the panels) has two
+  // deliberate limits now:
+  //   1. FRIENDLIES are never boosted. Club/international friendlies
+  //      contain essentially every team, so a favourite is ALWAYS "in"
+  //      them - the boost fired universally and shoved friendlies to the
+  //      top. They're excluded outright.
+  //   2. Once a visitor has taken ANY customise action, the boost stands
+  //      down entirely - their explicit choices win, the auto "my club up
+  //      top" no longer overrides them. (The gold favourite marker on the
+  //      cards is unaffected - it's computed separately in dashMatchCardHtml.)
+  //      P1a (26 July 2026, Andy): BROADENED from country-ranking-only to
+  //      any customise action (ranking, hiding comps/countries, gender bulk
+  //      toggles, and favouriting a comp) - closes the parked "stand-down
+  //      trigger" question. hasCustomisation() reads the whole scorr-custom
+  //      model, so favouriting a comp stands the boost down too.
+  var FRIENDLIES_GROUPS = { 'club-friendlies': true, 'friendlies-intl': true };
+  function favBoostActive() {
+    try { return !ScorrCompetitions.hasCustomisation(); }
+    catch (e) { return true; }
+  }
+  function compFavEligible(comp, favActive) {
+    return favActive && comp && !FRIENDLIES_GROUPS[comp.groupId];
+  }
+
+  // ── P1a (26 July 2026): favourite COMPETITIONS (distinct from favourite
+  // TEAMS, which drive My Teams + the boost above). Stored as an ordered
+  // groupId list in scorr-custom via ScorrCompetitions. Starred comps are
+  // pulled OUT of their home country group on the dashboard into a pinned
+  // "Favourite comps" section, in the visitor's saved order. All reads go
+  // through ScorrCompetitions so there is one source of truth; these thin,
+  // fail-safe wrappers keep the render code tidy and never throw if the
+  // competitions module somehow isn't present.
+  function favouriteCompOrder() {
+    try { return ScorrCompetitions.getFavouriteComps(); } catch (e) { return []; }
+  }
+  function isFavouriteCompId(groupId) {
+    try { return ScorrCompetitions.isFavouriteComp(groupId); } catch (e) { return false; }
+  }
+  function toggleFavouriteCompId(groupId) {
+    try { return ScorrCompetitions.toggleFavouriteComp(groupId); } catch (e) { return []; }
+  }
+
+  // Session 25 (Decision B): computed default expansion for a panel's
+  // competition groups. EXPANDED when the group has a favourite
+  // team's match (favourites = highlights until Session 37 splits
+  // them), OR comp priority <= 3, OR the group is among the top 2
+  // eligible by priority regardless of threshold. That last clause is
+  // a FLOOR and is load-bearing: without it a quiet Tuesday with only
+  // League One (7) and League Two (8) live would expand nothing and
+  // show a scores site with no scores - same instinct as the old
+  // minimum-of-4, moved from selection to expansion. Returns
+  // { groupId: collapsedBool }.
+  function computeCompDefaults(compGroupsAcrossCountries) {
+    var highlights = ScorrCore.getFavourites(); // Session 37: favourites drive expansion
+    var favActive = favBoostActive();           // 24 Jul: off once the visitor has ranked
+    var defaults = {};
+    var byPriority = compGroupsAcrossCountries.slice().sort(function (a, b) {
+      var pa = a.comp.priority != null ? a.comp.priority : 99;
+      var pb = b.comp.priority != null ? b.comp.priority : 99;
+      return pa - pb;
+    });
+    compGroupsAcrossCountries.forEach(function (group) {
+      var pri = group.comp.priority != null ? group.comp.priority : 99;
+      var hasFavourite = compFavEligible(group.comp, favActive) && group.matches.some(function (m) {
+        var f = m.fixture;
+        return highlights.indexOf(ScorrCore.formatTeamName(f.teams.home.name)) !== -1
+          || highlights.indexOf(ScorrCore.formatTeamName(f.teams.away.name)) !== -1;
+      });
+      // P1a (26 July 2026): a favourited comp defaults EXPANDED - you starred
+      // it, you want to see it. Reads through the same choke point everything
+      // else does (ScorrCompetitions.isFavouriteComp).
+      var isFavComp = isFavouriteCompId(group.groupId);
+      defaults[group.groupId] = !(hasFavourite || isFavComp || pri <= 3);
+    });
+    byPriority.slice(0, 2).forEach(function (group) {
+      defaults[group.groupId] = false; // the floor: top 2 always expanded
+    });
+    return defaults;
+  }
+  // Session 18l Part 10 (13 July 2026, Andy's request): whole-section
+  // collapse for Live Now / Next X Hours / Recent Results - see the
+  // CSS comment on .dash-section-toggle for the full rationale.
+  // Deliberately a SEPARATE key from GROUP_COLLAPSE_KEY above rather
+  // than reusing it - these collapse the entire section (heading +
+  // panel), not a competition/country group nested inside one, and
+  // conflating the two would mean a section-level collapse and a
+  // group-level collapse could collide on the same storage key if a
+  // future groupId ever happened to match a section id string.
+  // Simple flat map { sectionId: true } - only ever stores true for a
+  // collapsed section, never a false/absent entry for an expanded
+  // one, so a section defaults to expanded with zero migration needed
+  // the same way a brand new competition defaults to expanded in
+  // GROUP_COLLAPSE_KEY's list-based scheme.
+  var SECTION_COLLAPSE_KEY = 'scorr-section-collapse';
+  function getSectionCollapseState() {
+    try {
+      var raw = localStorage.getItem(SECTION_COLLAPSE_KEY);
+      var parsed = raw ? JSON.parse(raw) : {};
+      return (parsed && typeof parsed === 'object') ? parsed : {};
+    } catch (e) {
+      return {};
+    }
+  }
+  function isSectionCollapsed(sectionId) {
+    return getSectionCollapseState()[sectionId] === true;
+  }
+  function setSectionCollapsed(sectionId, collapsed) {
+    var state = getSectionCollapseState();
+    if (collapsed) {
+      state[sectionId] = true;
+    } else {
+      delete state[sectionId];
+    }
+    try {
+      localStorage.setItem(SECTION_COLLAPSE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // localStorage unavailable - same graceful fallback as
+      // setGroupCollapsed() above.
+    }
+  }
+  function applySectionCollapsedState(btn, panel, collapsed) {
+    btn.classList.toggle('collapsed', collapsed);
+    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    panel.style.display = collapsed ? 'none' : '';
+  }
+  // Wired once at page load, NOT re-wired on every refresh like
+  // wireDashGroupToggles() - the toggle button and panel div here are
+  // static markup (see the HTML above), never replaced via innerHTML
+  // the way each panel's inner match-card list is. Wiring this
+  // repeatedly would hit exactly the duplicate-listener bug fixed in
+  // wireDashEventHover() (Session 18l Part 8) - not an issue here
+  // since this only ever runs once, but worth noting why it's
+  // deliberately NOT called from inside refreshDashboardPanels().
+  function wireSectionToggle(toggleId, panelId, sectionId) {
+    var btn = document.getElementById(toggleId);
+    var panel = document.getElementById(panelId);
+    if (!btn || !panel) return;
+    applySectionCollapsedState(btn, panel, isSectionCollapsed(sectionId));
+    btn.addEventListener('click', function () {
+      var nowCollapsed = !btn.classList.contains('collapsed');
+      applySectionCollapsedState(btn, panel, nowCollapsed);
+      setSectionCollapsed(sectionId, nowCollapsed);
+    });
+  }
+  // Buckets a flat, already-sorted buildPanelSelection() result into
+  // per-competition groups, preserving the order competitions were
+  // first encountered in the flat list, THEN re-sorting the groups
+  // themselves: any group containing a highlighted team's match sorts
+  // first (so a highlighted result never ends up buried in a
+  // collapsed-by-default-feeling lower group), then by competition
+  // priority, then alphabetically for ties - the same
+  // highlight-then-priority-then-name ordering buildPanelSelection()
+  // and byPriorityThenName() already use elsewhere, just applied one
+  // level up (per group instead of per match).
+  function groupMatchesByCompetition(matches) {
+    var groupsById = {};
+    var order = [];
+    matches.forEach(function (entry) {
+      var gid = entry.comp.groupId || entry.comp.id;
+      if (!groupsById[gid]) {
+        groupsById[gid] = { groupId: gid, comp: entry.comp, matches: [], hasHighlight: false };
+        order.push(gid);
+      }
+      groupsById[gid].matches.push(entry);
+      if (entry.isHighlighted) groupsById[gid].hasHighlight = true;
+    });
+    var groups = order.map(function (gid) { return groupsById[gid]; });
+    groups.sort(function (a, b) {
+      if (a.hasHighlight !== b.hasHighlight) return a.hasHighlight ? -1 : 1;
+      var pa = a.comp.priority != null ? a.comp.priority : 99;
+      var pb = b.comp.priority != null ? b.comp.priority : 99;
+      if (pa !== pb) return pa - pb;
+      return (a.comp.name || '').localeCompare(b.comp.name || '');
+    });
+    return groups;
+  }
+  // Session 18k Part 2: top-level country grouping, sitting above the
+  // existing per-competition groupMatchesByCompetition() rather than
+  // replacing it - the accordion is now two levels (country -> comp).
+  // Country name and flag both come straight off the same fixture data
+  // already in hand (fixture.league.country / fixture.league.flag),
+  // exactly the same free-data pattern the competition crest used -
+  // no extra fetch. Falls back to the manifest config's own `country`
+  // field if a fixture is somehow missing league.country (defensive,
+  // shouldn't normally happen). api-sports.io reports "World" as the
+  // country for genuinely international competitions (World Cup etc,
+  // flag: null there) - remapped to "Internationals" here to match the
+  // pseudo-country label competitions.js already uses elsewhere on the
+  // site (Section 12.6's By Country accordion), so the same competition
+  // doesn't read as two different labels depending on which page you're
+  // looking at.
+  function countryDisplayName(rawName) {
+    return rawName === 'World' ? 'Internationals' : rawName;
+  }
+  function groupMatchesByCountry(matches) {
+    var countryMap = {};
+    var order = [];
+    matches.forEach(function (entry) {
+      var rawCountry = entry.comp.country || (entry.fixture.league && entry.fixture.league.country) || 'Other';
+      var displayName = countryDisplayName(rawCountry);
+      var key = displayName.toLowerCase();
+      var flag = (entry.fixture.league && entry.fixture.league.flag) ? entry.fixture.league.flag : '';
+      if (!countryMap[key]) {
+        countryMap[key] = { countryId: key, countryName: displayName, countryFlag: flag, matches: [], hasHighlight: false };
+        order.push(key);
+      }
+      var bucket = countryMap[key];
+      bucket.matches.push(entry);
+      if (entry.isHighlighted) bucket.hasHighlight = true;
+      if (!bucket.countryFlag && flag) bucket.countryFlag = flag;
+    });
+    var countries = order.map(function (k) { return countryMap[k]; });
+    function minPriority(list) {
+      var min = 99;
+      list.forEach(function (m) {
+        var p = m.comp.priority != null ? m.comp.priority : 99;
+        if (p < min) min = p;
+      });
+      return min;
+    }
+    countries.sort(function (a, b) {
+      if (a.hasHighlight !== b.hasHighlight) return a.hasHighlight ? -1 : 1;
+      var pa = minPriority(a.matches);
+      var pb = minPriority(b.matches);
+      if (pa !== pb) return pa - pb;
+      return a.countryName.localeCompare(b.countryName);
+    });
+    // P1 (24 July 2026): the visitor's own country ranking (customise.html)
+    // rides on top of the default sort above - ranked countries lead in their
+    // chosen order, everything else follows in default order. No-op when the
+    // visitor hasn't set an order (applyCustomCountryOrder returns as-is).
+    if (window.ScorrCompetitions && ScorrCompetitions.applyCustomCountryOrder) {
+      var customKeyOrder = ScorrCompetitions.applyCustomCountryOrder(countries.map(function (c) { return c.countryName; }));
+      countries.sort(function (a, b) {
+        return customKeyOrder.indexOf(a.countryName) - customKeyOrder.indexOf(b.countryName);
+      });
+    }
+    return countries;
+  }
+  function wireDashGroupToggles(container) {
+    container.querySelectorAll('.dash-group-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var groupEl = btn.closest('.dash-group');
+        var panelId = groupEl.dataset.panel;
+        var groupId = groupEl.dataset.groupId;
+        var nowCollapsed = !groupEl.classList.contains('collapsed');
+        groupEl.classList.toggle('collapsed', nowCollapsed);
+        btn.setAttribute('aria-expanded', nowCollapsed ? 'false' : 'true');
+        setGroupCollapsed(panelId, groupId, nowCollapsed);
+      });
+    });
+  }
+  // TOMBSTONE (20 July 2026, Andy's ruling "panels hide nothing"): the
+  // hardcoded cup-qualifying/preliminary exclusion that lived here since
+  // 18n is REMOVED - it was invisible filtering on a browse surface.
+  // Its replacement is the admin PANEL visibility dial in the tick-state
+  // editor (per-comp Off / "From: round"), enforced below via
+  // panelVisibilityFor()/ScorrCore.fixtureAllowedFromRound - a control
+  // Andy can see, set and clear, with fail-open on any unknown. Until he
+  // touches the dial, qualifying fixtures render normally and the
+  // Decision B accordion (low-priority comps default collapsed) absorbs
+  // the noise.
+  function isPanelEligibleFixture(fixture, comp) {
+    // International Friendlies were historically hardcoded out of the home
+    // dashboard panels (Session 18n) - a worldwide friendlies feed is a lot
+    // of low-recognition noise on the one page meant to be a tight summary.
+    // 20 July 2026 (Andy): that hardcode is GONE - friendlies now has an OFF
+    // panel BASELINE in panelVisibilityFor() (still absent by default) but is
+    // dial-able ON from the tick-state Panels editor. This function no longer
+    // special-cases any comp. KEEP IN SYNC with panelVisibilityFor + fetcher.js.
+    // (Future refinement, per Andy: when friendlies ARE shown, filter to only
+    // "worth showing" fixtures, e.g. containing a top-ranked national side.)
+    return true;
+  }
+  // 20 July 2026 (Andy): the admin panel dial. Applies ONLY to the
+  // three general panels (buildPanelSelection callers) - My Teams is
+  // personal and never gated; competition/team pages always show
+  // everything. Returns {off} or {roundIdx} for a fromRound setting.
+  function panelVisibilityFor(comp, fixtures) {
+    var vis = (window.ScorrCompetitions && ScorrCompetitions.getVisibility && ScorrCompetitions.getVisibility()) || {};
+    var setting = comp.groupId && vis[comp.groupId] && vis[comp.groupId].panel;
+    // 20 July 2026 (Andy): friendlies-intl has an OFF panel BASELINE
+    // (was a hardcode in isPanelEligibleFixture) - now dial-able from the
+    // tick-state Panels editor. No admin setting => off; an explicit 'on'
+    // or 'from round' shows it. KEEP IN SYNC with fetcher.js editor.
+    // 22 July 2026 (Andy): club-friendlies (api league 667, fetcher-side
+    // filtered to fixtures involving a tracked team) gets the SAME OFF panel
+    // baseline - off until dialled on from tick-state.
+    if (!setting && (comp.groupId === 'friendlies-intl' || comp.groupId === 'club-friendlies')) return { off: true, roundIdx: null };
+    if (setting === 'off') return { off: true, roundIdx: null };
+    if (setting && typeof setting === 'object' && typeof setting.fromRound === 'string') {
+      var order = ScorrCore.buildRoundOrder(fixtures);
+      var idx = {};
+      order.forEach(function (name, i) { idx[name] = i; });
+      return { off: false, roundIdx: idx, fromRound: setting.fromRound };
+    }
+    return { off: false, roundIdx: null };
+  }
+  function isLiveFixture(f) {
+    return ScorrCore.isLiveFixture(f); // Consolidation 3: shared with team.html
+  }
+  function isInNextWindow(f) {
+    var status = f.fixture.status.short;
+    if (status !== 'NS' && status !== 'TBD') return false;
+    var kickoff = new Date(f.fixture.date).getTime();
+    var now = Date.now();
+    var windowHours = getNextWindowHours();
+    // Hidden-things ruling #2 (20 July 2026, Andy): TBD-kickoff fixtures
+    // were invisible in EVERY dashboard panel - this test admitted NS
+    // only, so a match scheduled today with an unconfirmed time simply
+    // didn't exist here. A TBD date is usually a bare calendar day
+    // (midnight in some timezone), so comparing it as a precise kickoff
+    // would still hide it for most of the day. Treat a TBD fixture as
+    // its whole LOCAL calendar day instead: visible while any part of
+    // that day overlaps the panel window (same 3h trailing grace NS
+    // gets). Unparseable date = out (nothing sane to show).
+    if (status === 'TBD') {
+      if (isNaN(kickoff)) return false;
+      var d0 = new Date(kickoff);
+      var dayStart = new Date(d0.getFullYear(), d0.getMonth(), d0.getDate()).getTime();
+      var dayEnd = dayStart + 24 * 60 * 60 * 1000;
+      return dayEnd >= (now - 3 * 60 * 60 * 1000) && dayStart <= (now + windowHours * 60 * 60 * 1000);
+    }
+    // 18 July 2026 (with the MLS fix): an NS fixture whose kickoff has
+    // JUST passed stays in the panel for up to 3 hours instead of
+    // vanishing - the data pipeline can serve NS for ~90s after a real
+    // kickoff (Railway tick + edge + browser caches), and before this
+    // the fixture was in NEITHER panel for that gap (not live per the
+    // data, kickoff no longer in the future). 3h mirrors the fetcher's
+    // own isMatchHoursActive() NS window; a genuinely stuck NS fixture
+    // ages out the same way it does there.
+    return kickoff >= (now - 3 * 60 * 60 * 1000) && kickoff <= (now + windowHours * 60 * 60 * 1000);
+  }
+  // Session 18j: mirrors isInNextWindow() but backward-looking - finished
+  // fixture whose kickoff falls within the last RECENT_RESULTS_WINDOW_HOURS.
+  // Uses kickoff time rather than an actual finish timestamp (which isn't
+  // available in this data), same approximation isInNextWindow already
+  // makes in the other direction - close enough for a "recent" panel,
+  // not used anywhere precision matters.
+  function isRecentResult(f) {
+    if (RECENT_RESULT_STATUSES.indexOf(f.fixture.status.short) === -1) return false;
+    var kickoff = new Date(f.fixture.date).getTime();
+    var now = Date.now();
+    return kickoff <= now && kickoff >= (now - RECENT_RESULTS_WINDOW_HOURS * 60 * 60 * 1000);
+  }
+  function buildPanelSelection(entries, fixtureTest, sortDescending) {
+    var highlights = ScorrCore.getFavourites(); // Session 37: favourites drive selection/sorting
+    var favActive = favBoostActive();           // 24 Jul: off once the visitor has ranked
+    var perComp = entries.map(function (entry) {
+      // 20 July 2026: admin panel dial - Off drops the comp from these
+      // panels entirely; "From: round" hides earlier rounds (fail-open
+      // via the shared helper). My Teams is untouched by design.
+      var panelVis = panelVisibilityFor(entry.comp, entry.fixtures);
+      if (panelVis.off) return { comp: entry.comp, fixtures: [], hasHighlight: false };
+      var eligible = entry.fixtures.filter(function (f) {
+        return isPanelEligibleFixture(f, entry.comp) &&
+          ScorrCore.fixtureAllowedFromRound(f, panelVis.fromRound, panelVis.roundIdx) &&
+          fixtureTest(f);
+      });
+      var hasHighlight = compFavEligible(entry.comp, favActive) && eligible.some(function (f) {
+        var home = ScorrCore.formatTeamName(f.teams.home.name);
+        var away = ScorrCore.formatTeamName(f.teams.away.name);
+        return highlights.indexOf(home) !== -1 || highlights.indexOf(away) !== -1;
+      });
+      return { comp: entry.comp, fixtures: eligible, hasHighlight: hasHighlight };
+    }).filter(function (p) { return p.fixtures.length > 0; });
+    function byPriorityThenName(a, b) {
+      var pa = a.comp.priority != null ? a.comp.priority : 99;
+      var pb = b.comp.priority != null ? b.comp.priority : 99;
+      if (pa !== pb) return pa - pb;
+      return (a.comp.name || '').localeCompare(b.comp.name || '');
+    }
+    var mustInclude = perComp.filter(function (p) { return p.hasHighlight; });
+    var rest = perComp.filter(function (p) { return !p.hasHighlight; }).sort(byPriorityThenName);
+    // Session 25 (Decision B): the cap is GONE - panels show every
+    // competition with an eligible fixture. Selection stopped being
+    // about presence and became about EXPANSION STATE (collapsed
+    // groups cost ~30px, so 15 countries fit fine); see
+    // computeCompDefaults(). MIN_PANEL_COMPETITIONS retired with it.
+    var selected = mustInclude.concat(rest);
+    var allMatches = [];
+    selected.forEach(function (p) {
+      p.fixtures.forEach(function (f) {
+        var home = ScorrCore.formatTeamName(f.teams.home.name);
+        var away = ScorrCore.formatTeamName(f.teams.away.name);
+        allMatches.push({
+          fixture: f,
+          comp: p.comp,
+          // Sort/ordering flag only - gated by the fav-boost scope (friendlies
+          // excluded, off once ranked). The gold card marker is separate
+          // (dashMatchCardHtml -> ScorrCore.isFavourite), so it's unaffected.
+          isHighlighted: compFavEligible(p.comp, favActive) && (highlights.indexOf(home) !== -1 || highlights.indexOf(away) !== -1)
+        });
+      });
+    });
+    allMatches.sort(function (a, b) {
+      if (a.isHighlighted !== b.isHighlighted) return a.isHighlighted ? -1 : 1;
+      var pa = a.comp.priority != null ? a.comp.priority : 99;
+      var pb = b.comp.priority != null ? b.comp.priority : 99;
+      if (pa !== pb) return pa - pb;
+      // Session 18j: Recent Results wants most-recent-first (descending)
+      // rather than Live Now/Next 12 Hours' soonest-first (ascending) -
+      // sortDescending flips the comparison direction, defaulting to the
+      // original ascending behaviour when omitted so neither existing
+      // caller changes.
+      var direction = sortDescending ? -1 : 1;
+      return direction * (new Date(a.fixture.fixture.date) - new Date(b.fixture.fixture.date));
+    });
+    return allMatches;
+  }
+  // Statuses eligible for the hover event-card preview: finished
+  // matches (unchanged from the original My Teams ask) AND live ones
+  // (added per Andy's follow-up - arguably more useful on Live Now
+  // than on a finished result, since it's the same event data source
+  // either way). Shared constant so dashMatchCardHtml's markup-
+  // inclusion check and wireDashEventHover's listener-wiring check
+  // can't drift out of sync with each other.
+  // 18 July 2026: + SUSP/INT/LIVE (F-M2 drift family) - a suspended
+  // match's goals-so-far are exactly what a viewer wants to preview.
+  var EVENT_CARD_STATUSES = ScorrCore.EVENT_CARD_STATUSES; // Consolidation 2: derived finished+live in core.js, can't drift
+  // Session 18l Part 2 (13 July 2026, Andy's request): round labels
+  // abbreviated further - "SEMI-FINALS" etc was too wide and, being
+  // variable-length, was the direct cause of the horizontal
+  // misalignment flagged in the same feedback (see the dash-card-
+  // header restructure below). Handles the FA Cup override table's
+  // output ("First Round" etc, from ScorrCore.formatRoundName) as
+  // well as raw api-sports.io round strings that have no override
+  // (World Cup knockout stage labels like "Semi-finals", League
+  // Cup's "Round of 32", etc). Falls through to the label unchanged
+  // if nothing matches - CSS ellipsis on .dash-round-badge is the
+  // final safety net for anything this doesn't recognise.
+  // Session E (28 July 2026): the abbreviator was consolidated into
+  // ScorrCore.abbreviateRoundLabel (this and team.html's formatRoundBadge
+  // held byte-identical copies that had drifted into the same greedy-
+  // /final/ qualifying bug). Thin delegate kept so existing callers here
+  // are untouched.
+  function abbreviateRoundLabel(label) {
+    return ScorrCore.abbreviateRoundLabel(label);
+  }
+  // Session 18l: per-card round/matchday badge, replacing the old
+  // per-card competition abbreviation - see the CSS comment above
+  // .dash-round-badge for why. Only league-format rounds get the MD
+  // treatment (api-sports.io's "... - N" pattern, e.g. "Regular
+  // Season - 3") - restricted to format === 'league' specifically
+  // (not just "!== 'cup'") after Session 18l Part 2 caught this
+  // wrongly turning World Cup's "Round of 16" into "MD16" (its
+  // format is groups_knockout, and "16" is the trailing digit in
+  // BOTH a matchday number and a round-of-N label, so the two need
+  // to be told apart by format rather than by the round string
+  // alone). Everything else routes through formatRoundName() (FA
+  // Cup override table) then abbreviateRoundLabel() above.
+  function formatCardRoundBadge(comp, round) {
+    // 9 Aug 2026 (F1): consolidated into the one shared builder in core.js
+    // (ScorrCore.formatRoundBadge) - was duplicated here and in team.html's
+    // formatRoundBadge, which had drifted. Thin wrapper keeps the call site
+    // below untouched. Friendlies-suppression, the league matchday rule and
+    // the World-Cup FA-Cup-override skip all live in core.js now.
+    return ScorrCore.formatRoundBadge(comp, round);
+  }
+  // Session 18n (Andy's request): aggregate scores for two-legged
+  // knockout ties, shown inline in brackets right after each team's
+  // own score, on every match card across the dashboard (Live Now,
+  // Next 12 Hours, Recent Results, My Teams - all reuse
+  // dashMatchCardHtml() below, so fixing it here covers all four).
+  // api-sports.io has no leg or aggregate field anywhere in its data -
+  // confirmed directly against real UCL 2025/26 knockout fixtures - so
+  // both are computed here from the raw fixture lists already being
+  // fetched for the dashboard. Deliberately a standalone copy rather
+  // than added to js/team-fixtures.js - this is rendering-adjacent
+  // computation, not data loading, matching how team.html/
+  // competition.html each keep their own copy of this same logic
+  // rather than sharing it.
+  var lastLegInfo = {};
+  function isLeaguePhaseRoundKO(round) {
+    return /-\s*\d+\s*$/.test(round || '');
+  }
+  // entries: array of { comp, fixtures } - the shape
+  // loadAllCompetitionFixtures()/loadArchivedFixturesOnce() already
+  // produce. Only groups_knockout competitions are considered;
+  // everything else is a no-op pass-through. Fixtures are grouped by
+  // round + the two teams' ids (order-independent, since which team
+  // is "home" flips between legs); exactly two fixtures in a group ->
+  // earlier date is leg 1, later is leg 2. Deliberately NOT keyed off
+  // either fixture's own `winner` field for the aggregate winner -
+  // confirmed against real data that it only reflects that single
+  // leg's own result, not the tie (Galatasaray beat Juventus 5-2 in
+  // leg 1, then lost leg 2 3-2 AET - winner: true for Juventus on that
+  // fixture alone - but still went through 7-5 on aggregate). aggHome/
+  // aggAway are populated once the FIRST leg is finished (FT/AET/PEN)
+  // and the second leg carries a real score, so a LIVE second leg shows
+  // a live aggregate (29 July 2026 fix - the rule used to require BOTH
+  // legs finished, which hid it for the whole second leg).
+  function buildKnockoutLegInfoFromEntries(entries) {
+    var info = {};
+    var finishedStatuses = ScorrCore.FINISHED_STATUSES; // Audit B: the one list
+    entries.forEach(function (entry) {
+      var comp = entry.comp;
+      if (!comp || comp.format !== 'groups_knockout') return;
+      var fixtures = entry.fixtures || [];
+      var groups = {};
+      fixtures.forEach(function (f) {
+        var round = (f.league && f.league.round) || '';
+        if (isLeaguePhaseRoundKO(round)) return;
+        var ids = [f.teams.home.id, f.teams.away.id].sort(function (a, b) { return a - b; });
+        var key = comp.id + '|' + round + '|' + ids.join('-');
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(f);
+      });
+      Object.keys(groups).forEach(function (key) {
+        var group = groups[key];
+        if (group.length !== 2) return;
+        group.sort(function (a, b) { return new Date(a.fixture.date) - new Date(b.fixture.date); });
+        var leg1 = group[0];
+        var leg2 = group[1];
+        info[leg1.fixture.id] = { leg: 1, aggHome: null, aggAway: null };
+        // 29 July 2026 (Andy, from prod - UCL QR2 second leg LIVE at 115'
+        // with no aggregate): the gate was leg1Finished && leg2Finished, so
+        // the aggregate only appeared once the TIE was over - hidden for the
+        // whole 90+ minutes it matters, on every dashboard panel and My
+        // Teams card. Only the FIRST leg must be settled; leg 2 contributes
+        // its current score, so a live second leg carries a live aggregate.
+        // It updates on the existing 60s sweep (lastLegInfo is rebuilt each
+        // refresh and the panel fingerprint includes goals) - no new polling.
+        // FAIL SOFT on any null (first leg not cached, NS/PST second leg, a
+        // bad feed row): no aggregate rather than a wrong one.
+        // KEEP IN SYNC with competition.html + team.html - the same rule
+        // lives in three copies (flagged for consolidation).
+        var leg1Finished = finishedStatuses.indexOf(leg1.fixture.status.short) !== -1;
+        var l1h = leg1.goals ? leg1.goals.home : null;
+        var l1a = leg1.goals ? leg1.goals.away : null;
+        var l2h = leg2.goals ? leg2.goals.home : null;
+        var l2a = leg2.goals ? leg2.goals.away : null;
+        var aggHome = null;
+        var aggAway = null;
+        if (leg1Finished && l1h != null && l1a != null && l2h != null && l2a != null) {
+          var homeIdLeg2 = leg2.teams.home.id;
+          var awayIdLeg2 = leg2.teams.away.id;
+          aggHome = (leg1.teams.home.id === homeIdLeg2 ? l1h : l1a) + l2h;
+          aggAway = (leg1.teams.home.id === awayIdLeg2 ? l1h : l1a) + l2a;
+        }
+        info[leg2.fixture.id] = { leg: 2, aggHome: aggHome, aggAway: aggAway };
+      });
+    });
+    return info;
+  }
+  // 18 July 2026 evening (Andy): the My Teams NEXT FIXTURE card shows a
+  // real DATE, not the weekday-only formatKickoffWithDay() the panel
+  // cards use - a favourite's next game can be a month out ("Villa
+  // don't play for a month and it says Sunday 11pm"), where a bare
+  // weekday is actively misleading. The panel cards keep the weekday
+  // form because their fixtures are at most ~48h away by construction.
+  //
+  // 31 July 2026 (Andy) - RESTACKED: on a narrow card the single line
+  // "4th August 10:30 pm", pinned right and non-shrinking, crushed both
+  // team names to stubs ("BG Path... v Aston..."). The date and time now
+  // STACK on the right - date on the top line (level with the home team),
+  // time directly below (level with the away team) - and the month is
+  // abbreviated to three letters, so the block is only ~"4th Aug" wide
+  // and the names get the freed width. The stacked markup is built in
+  // dashMatchCardHtml() below (see the `stacked` branch), not here.
+  // Month names stay a fixed en array (sliced to 3 chars - NOT
+  // toLocaleDateString) so output can't drift with the runtime locale;
+  // the TIME still runs through ScorrCore.formatKickoff (and now carries
+  // data-iso, like team.html, so the 12/24h toggle re-formats it live as
+  // well as on the next render).
+  var LONG_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+  // "4 Aug 26" - the DATE half of the My Teams next-fixture card, with a
+  // 2-digit year (Andy, 31 July: a next fixture can be far enough out that
+  // the year matters). 9 Aug 2026 (F4b, Andy): the "4th/1st/2nd" ordinal
+  // suffix was dropped to align with the shared card-date look ("4 Aug");
+  // the fixed en month array stays (NOT toLocaleDateString) so the compact
+  // width can't drift with the runtime locale - the reason this one date
+  // isn't routed through ScorrCore.formatCardDate. The retired ordinalDay()
+  // helper went with the suffix. The time half is built separately (with
+  // data-iso) in dashMatchCardHtml so the clock toggle re-formats it live.
+  function formatLongDatePart(isoDate) {
+    var d = new Date(isoDate);
+    var yy = String(d.getFullYear() % 100).padStart(2, '0');
+    return d.getDate() + ' ' + LONG_MONTHS[d.getMonth()].slice(0, 3) + ' ' + yy;
+  }
+  // TOMBSTONE (Consolidation 1, 20 July 2026): dashLiveStatusText lived
+  // here for two days - its logic (and its bugs) moved to
+  // ScorrCore.statusInfo(). Do not rebuild page-local status mapping.
+  // opts is OPTIONAL and only honoured when it's a real object -
+  // group.matches.map(dashMatchCardHtml) passes the array INDEX as the
+  // second argument, so a plain truthiness check would turn longDate
+  // on for every panel card after the first. Only the My Teams
+  // renderer passes {longDate: true} explicitly.
+  function dashMatchCardHtml(entry, opts) {
+    var useLongDate = !!(opts && typeof opts === 'object' && opts.longDate);
+    var f = entry.fixture;
+    var comp = entry.comp;
+    var status = f.fixture.status.short;
+    var elapsed = f.fixture.status.elapsed;
+    var home = ScorrCore.formatTeamName(f.teams.home.name);
+    var away = ScorrCore.formatTeamName(f.teams.away.name);
+    var hg = f.goals.home;
+    var ag = f.goals.away;
+    var hasScore = (hg !== null) && (ag !== null);
+    var isLive = isLiveFixture(f);
+    // Session 40: score-from-events override (see eventsScoreOverrides
+    // above) - per side, show max(API, events count). Only when the API
+    // has a score at all (an NS card must not sprout goals).
+    // Polish bundle (3 Aug 2026, audit 1.4): use the shared freshness rule
+    // ScorrCore.eventsScoreOverrideFresh - a LIVE row's override must be
+    // <3 min old to out-vote the API (team/competition pages already do
+    // this). The old raw 6h window let a VAR-disallowed goal linger on a
+    // dashboard card for hours; finished rows still keep the 6h window.
+    var scoreOvr = eventsScoreOverrides[f.fixture.id];
+    if (hasScore && ScorrCore.eventsScoreOverrideFresh(scoreOvr, isLive)) {
+      hg = Math.max(hg, scoreOvr.home);
+      ag = Math.max(ag, scoreOvr.away);
+    }
+    // Session 18n: aggregate bracket, trailing after each team's own
+    // score - see lastLegInfo's comment above.
+    var legData = lastLegInfo[f.fixture.id];
+    var homeAggBracket = (legData && legData.aggHome != null) ? (' <span class="agg-score">(' + legData.aggHome + ')</span>') : '';
+    var awayAggBracket = (legData && legData.aggAway != null) ? (' <span class="agg-score">(' + legData.aggAway + ')</span>') : '';
+    var statusText;
+    if (status === 'NS') {
+      // Session 18l Part 4: formatKickoffWithDay() specifically -
+      // NOT formatKickoff() - see the comment on that function in
+      // core.js for why the two are kept separate (competition.html
+      // already has the day/date on its own day-header rows, this
+      // page doesn't).
+      // Panel cards keep this weekday form (their fixtures are near).
+      // My Teams cards (useLongDate) instead render a STACKED date-over-
+      // time block - built in the `stacked` branch below - so statusText
+      // is only consumed by the non-stacked path.
+      statusText = ScorrCore.formatKickoffWithDay(f.fixture.date);
+    } else if (status === 'TBD') {
+      // Hidden-things ruling #2 (20 July 2026, Andy): TBD fixtures now
+      // surface in Next X - show the DATE plus an explicit TBD instead
+      // of fabricating a midnight kickoff time from the placeholder date
+      // ("21 Jul, TBD"). 9 Aug 2026 (F6): the inline builder is now the
+      // shared ScorrCore.formatTbdHint, so the competition and team cards
+      // read identically - output unchanged here.
+      statusText = ScorrCore.formatTbdHint(f.fixture.date);
+    } else {
+      // Consolidation 1 (20 July 2026): every non-NS status renders
+      // through ScorrCore.statusInfo() - the minute gating, HT/SUSP
+      // labels, PENS and the "FT (5-4p)" shootout format all live in
+      // the ONE shared mapping now (this page's private copies were
+      // two of the four drift bugs that forced the extraction).
+      statusText = ScorrCore.statusInfo(status, elapsed, f.fixture.status.extra, f.score && f.score.penalty).label;
+    }
+    var round = (f.league && f.league.round) ? f.league.round : '';
+    var roundBadgeText = formatCardRoundBadge(comp, round);
+    var homeLogo = (f.teams.home && f.teams.home.logo) ? f.teams.home.logo : '';
+    var awayLogo = (f.teams.away && f.teams.away.logo) ? f.teams.away.logo : '';
+    var homeCrest = homeLogo ? '<img class="dash-crest" src="' + ScorrCore.esc(homeLogo) + '" alt="" onerror="this.style.visibility=\'hidden\'">' : '';
+    var awayCrest = awayLogo ? '<img class="dash-crest" src="' + ScorrCore.esc(awayLogo) + '" alt="" onerror="this.style.visibility=\'hidden\'">' : '';
+    // Session 37: dashboard cards mark FAVOURITES with one binary
+    // treatment (gold left edge + bold name - Andy's pick), replacing
+    // the old highlight-1..4 colour tints, which now belong to the
+    // competition page alone.
+    var homeFav = ScorrCore.isFavourite(home);
+    var awayFav = ScorrCore.isFavourite(away);
+    var highlightCls = (homeFav || awayFav) ? 'is-favourite' : '';
+    var rowClass = 'dash-match-row match-row' + (isLive ? ' is-live' : '') + (highlightCls ? ' ' + highlightCls : '');
+    var link = 'competition.html?comp=' + encodeURIComponent(comp.id);
+    var statusClass = 'dash-match-status' + (isLive ? ' live-badge' : '');
+    var liveDot = isLive ? '<span class="live-dot"></span>' : '';
+    // isEventCapable drives whether an (initially empty) events panel
+    // is included at all - wireDashEventHover() only wires hover
+    // listeners onto rows whose data-status is in the same shared
+    // list, so a not-started card never gets the extra markup in the
+    // first place.
+    var isEventCapable = EVENT_CARD_STATUSES.indexOf(status) !== -1;
+    var eventsPanelHtml = isEventCapable ? '<div class="match-events"></div>' : '';
+    // Session 18l: touch-only "go to competition page" affordance,
+    // shown via CSS solely on hover:none devices (see the
+    // .dash-card-nav-arrow rule above) - kept in the markup for every
+    // device, the media query decides whether it's actually visible.
+    // Only added for event-capable cards, matching exactly which cards
+    // switch from tap-to-navigate to tap-to-expand on touch - see
+    // wireDashEventHover() further down for the click handling.
+    var navArrowHtml = isEventCapable
+      ? '<span class="dash-card-nav-arrow" aria-label="Go to competition page"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg></span>'
+      : '';
+    // Session 18l Part 3: single inline row again - round badge
+    // (fixed width, see .dash-round-badge) on the left before the
+    // teams, day+time/status on the right where it always was.
+    // 18 July 2026 (Andy): comp line (short name, then crest - Andy's
+    // order: "EPL - crest") above the round badge, MY TEAMS CARDS ONLY.
+    // Andy's correction same evening: the panel cards must NOT carry it
+    // - their accordion headers already name the comp, and the extra
+    // column made every card wider. The line is still rendered into
+    // every card here (one shared render path, and this keeps the
+    // live-refresh fingerprint identical across contexts) but CSS
+    // shows it solely inside .my-team-card - the only card type with
+    // no other comp context (see .dash-card-comp below). Crest source
+    // is fixture.league.logo - the SAME source the accordion group
+    // crest uses - with comp.logo as fallback.
+    var cardCompLabel = comp.shortName || comp.name || '';
+    var cardCompCrestUrl = (f.league && f.league.logo) ? f.league.logo : (comp.logo || '');
+    var cardCompCrestHtml = cardCompCrestUrl
+      ? '<img class="dash-card-comp-crest" src="' + ScorrCore.esc(cardCompCrestUrl) + '" alt="" onerror="this.style.visibility=\'hidden\'">'
+      : '';
+    // 9 Aug 2026 (F3): crest-then-name, matching the team page's comp line
+    // (.team-match-comp-badge). Was name-then-crest here - the only surface
+    // that ordered it that way.
+    var cardCompLineHtml = '<span class="dash-card-comp">' +
+      cardCompCrestHtml +
+      '<span class="dash-card-comp-name">' + ScorrCore.esc(cardCompLabel) + '</span>' +
+      '</span>';
+    // 31 July 2026 (Andy): My Teams next-fixture (useLongDate NS) card
+    // gets a STACKED status - "4th Aug" over "10:30 pm" - so the long
+    // date stops crushing the team names. Only this card type gets the
+    // .dash-status-stacked class, so the CSS keyed on it can't reach
+    // panel cards or the Last Result row. The time carries .match-time +
+    // data-iso so ScorrCore.refreshKickoffTimes() re-formats it in place
+    // on the 12/24h toggle (same wiring team.html uses). Date/time are
+    // machine-generated (Date + formatKickoff), no user input, but esc'd
+    // anyway for uniformity.
+    var stacked = useLongDate && status === 'NS';
+    var statusInner;
+    if (stacked) {
+      statusInner =
+        '<span class="dash-status-date">' + ScorrCore.esc(formatLongDatePart(f.fixture.date)) + '</span>' +
+        '<span class="dash-status-time match-time" data-iso="' + ScorrCore.esc(f.fixture.date) + '">' + ScorrCore.esc(ScorrCore.formatKickoff(f.fixture.date)) + '</span>';
+    } else {
+      statusInner = liveDot + ScorrCore.esc(statusText); // Audit B: raw API codes can reach the label
+    }
+    return '<a class="' + rowClass + '" href="' + link + '"' +
+        ' data-fixture-id="' + f.fixture.id + '"' +
+        ' data-status="' + status + '"' +
+        ' data-home="' + ScorrCore.esc(home) + '"' +
+        ' data-away="' + ScorrCore.esc(away) + '">' +
+      navArrowHtml +
+      '<div class="dash-match-main">' +
+        '<span class="dash-badge-col">' + cardCompLineHtml +
+          '<span class="dash-round-badge">' + ScorrCore.esc(roundBadgeText) + '</span></span>' +
+        '<span class="dash-match-teams">' +
+          '<span class="dash-team-row">' + homeCrest + '<span class="dash-team-name team-link' + (homeFav ? ' fav-name' : '') + '" data-team="' + ScorrCore.esc(home) + '">' + ScorrCore.esc(home) + '</span><span class="dash-team-score' + (isLive ? ' live-score' : '') + '">' + (hasScore ? (hg + homeAggBracket) : '') + '</span></span>' +
+          '<span class="dash-team-row">' + awayCrest + '<span class="dash-team-name team-link' + (awayFav ? ' fav-name' : '') + '" data-team="' + ScorrCore.esc(away) + '">' + ScorrCore.esc(away) + '</span><span class="dash-team-score' + (isLive ? ' live-score' : '') + '">' + (hasScore ? (ag + awayAggBracket) : '') + '</span></span>' +
+        '</span>' +
+        '<span class="' + statusClass + (stacked ? ' dash-status-stacked' : '') + '">' + statusInner + '</span>' +
+      '</div>' +
+      eventsPanelHtml +
+    '</a>';
+  }
+  // ── Hover event card for finished matches (mirrors competition.html) ──
+  // Fetches goals/cards for a single fixture from the same /events
+  // endpoint competition.html uses, with the same three-state cache
+  // (loading/loaded/error) so hovering the same card twice doesn't
+  // re-fetch. Kept separate from competition.html's own
+  // eventsCache/loadEventsForRow/renderEventsPanel (different global
+  // scope, this is a different page) rather than sharing code across
+  // files.
+  var dashEventsCache = {};
+  // Consolidation 2 (20 July 2026): dashFormatEventIcon moved to
+  // ScorrCore.formatEventIcon (was one of three identical copies).
+  // ── Session 40 sitting 1 (18 July 2026, Andy's France-England report:
+  // "3 scorers showing but score says 0-2"): score-from-events rule.
+  // The card score comes from /fixtures and the scorer list from
+  // /events, and events run FRESHER - so the two can contradict each
+  // other on screen. Andy's rule: per side, show whichever is HIGHER -
+  // the API score or the goal count derived from the events list (same
+  // filters as the vidiprinter: no shootout attempts, no missed pens).
+  // A higher score with no scorer named yet is fine (means we're
+  // waiting on attribution); scorers without their goal counted is
+  // what's not acceptable. Overrides live in a map keyed by fixture id,
+  // applied with max() inside dashMatchCardHtml on every render (so the
+  // 60s sweep can't revert the score while /fixtures lags) and
+  // self-heal once the API catches up (max of equal values). 6h expiry
+  // guards against a stale entry outliving its match.
+  var eventsScoreOverrides = {};
+  // Polish bundle (3 Aug 2026): EVENTS_SCORE_OVERRIDE_MS retired - the
+  // freshness rule now lives in ScorrCore.eventsScoreOverrideFresh (used
+  // above), matching team/competition pages.
+  // Consolidation 2: countGoalsFromEvents moved to ScorrCore (identical
+  // on all three pages); the DOM patch below stays page-side - the
+  // .dash-team-score spans it touches are this page's own markup.
+  function setDashScoreSpan(span, val) {
+    if (!span) return;
+    var agg = span.querySelector('.agg-score');
+    span.innerHTML = String(val) + (agg ? ' ' + agg.outerHTML : '');
+  }
+  function applyEventsScoreToRow(row, events, homeTeam, awayTeam) {
+    var counted = ScorrCore.countGoalsFromEvents(events, homeTeam);
+    eventsScoreOverrides[row.dataset.fixtureId] = { home: counted.home, away: counted.away, ts: Date.now() };
+    // immediate in-place patch so the open panel and the card can never
+    // disagree even before the next sweep re-render
+    var spans = row.querySelectorAll('.dash-team-score');
+    if (spans.length === 2) {
+      var curHome = parseInt(spans[0].textContent, 10);
+      var curAway = parseInt(spans[1].textContent, 10);
+      if (!isNaN(curHome) && counted.home > curHome) setDashScoreSpan(spans[0], counted.home);
+      if (!isNaN(curAway) && counted.away > curAway) setDashScoreSpan(spans[1], counted.away);
+    }
+  }
+  // Consolidation 2 (20 July 2026): the panel builder + filter and the
+  // whole fetch/cache loader live in ScorrCore now (renderEventsPanel /
+  // loadEventsForRow - full history there: 12 Jul live-refresh fix, 14
+  // Jul &status= cache fix, 17 Jul shootout filter). This page keeps
+  // its cache and its Session 40 score patch in the render wrapper.
+  function dashRenderEventsPanel(panel, events, homeTeam, awayTeam) {
+    // Session 40: every panel render re-derives the score override -
+    // this is the moment we KNOW what the events say.
+    var ownerRow = panel.closest('.dash-match-row');
+    if (ownerRow && ownerRow.dataset.fixtureId) applyEventsScoreToRow(ownerRow, events, homeTeam, awayTeam);
+    ScorrCore.renderEventsPanel(panel, events, homeTeam, awayTeam);
+  }
+  function dashLoadEventsForRow(row) {
+    ScorrCore.loadEventsForRow(row, { cache: dashEventsCache, workerUrl: WORKER_URL, render: dashRenderEventsPanel });
+  }
+  // Re-run after every render that could introduce new finished
+  // dash-match-row cards (currently just My Teams' Last Result card).
+  //
+  // Session 18l Part 8 (13 July 2026, Andy's bug report): the old
+  // comment here claimed this was "safe to call repeatedly - innerHTML
+  // replacement on each refresh means every call wires fresh DOM
+  // nodes" - true for refreshDashboardPanels() (which replaces every
+  // panel's innerHTML before calling this once), but NOT true for the
+  // Next X Hours window dropdown's change handler, which only re-
+  // renders next12-list yet still calls this same function globally.
+  // That left Live Now/Recent Results/My Teams' EXISTING (not
+  // replaced) row elements getting a SECOND click listener stacked on
+  // top of their first one - two listeners meant events-open got
+  // toggled twice per tap (open then immediately closed again in the
+  // same click), so touch devices looked like tapping had stopped
+  // working entirely, until a full page reload reset everything with
+  // a single clean wiring pass. Fixed with a per-row dataset guard
+  // below: a freshly-rendered row (via innerHTML replacement) never
+  // carries the flag, so it's always wired exactly once on its first
+  // appearance; an existing row a partial re-render left untouched
+  // already carries the flag from its original wiring and is
+  // correctly skipped on subsequent calls, however many panels a given
+  // call is meant to cover.
+  function wireDashEventHover() {
+    var supportsHover = window.matchMedia('(hover: hover)').matches;
+    document.querySelectorAll('.dash-match-row[data-status]').forEach(function (row) {
+      if (EVENT_CARD_STATUSES.indexOf(row.dataset.status) === -1) return;
+      if (row.dataset.hoverWired === '1') return;
+      row.dataset.hoverWired = '1';
+      if (supportsHover) {
+        row.addEventListener('mouseenter', function () {
+          row.classList.add('events-open');
+          dashLoadEventsForRow(row);
+        });
+        row.addEventListener('mouseleave', function () {
+          row.classList.remove('events-open');
+        });
+      } else {
+        // Session 18l: touch devices get tap-to-expand/collapse instead
+        // of a hover preview - the small arrow (.dash-card-nav-arrow,
+        // shown only on hover:none devices via CSS) is now the explicit
+        // "go to competition page" action; tapping anywhere else on the
+        // card toggles the same event-card preview hover already gives
+        // desktop, rather than navigating away immediately. The
+        // hoverWired guard above (Part 8) is what actually prevents
+        // duplicate listeners here now - see that comment for why.
+        row.addEventListener('click', function (e) {
+          if (e.target.closest('.dash-card-nav-arrow')) return; // explicit nav control - let the default <a> navigation happen
+          e.preventDefault();
+          var nowOpen = row.classList.toggle('events-open');
+          if (nowOpen) dashLoadEventsForRow(row);
+        });
+      }
+    });
+  }
+  // Session 18k Part 2: now a two-level accordion - country groups
+  // (flag icon, via groupMatchesByCountry()) each containing their own
+  // competition groups (crest icon, via groupMatchesByCompetition(),
+  // completely unchanged and reused as-is one level deeper). Both
+  // tiers share the same isGroupCollapsed/setGroupCollapsed storage
+  // and the same generic wireDashGroupToggles() - country-level ids
+  // are prefixed "country:" so they can never collide with a
+  // competition's own groupId string in that same flat collapsed-ids
+  // list per panel.
+  // P1a (26 July 2026): the gold favourite star shown on every dashboard
+  // competition-group header. A clickable SPAN (role=button) rather than a
+  // real <button>, because it sits alongside the toggle <button> and nesting
+  // buttons is invalid - its own capture-phase handler stops the click from
+  // reaching the accordion toggle (wireDashFavStars). Fill vs outline is pure
+  // CSS off .is-fav, so the same SVG serves both states.
+  var DASH_STAR_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
+  function dashFavStarHtml(groupId, isFav) {
+    return '<span class="dash-fav-star' + (isFav ? ' is-fav' : '') + '" role="button" tabindex="0"' +
+      ' data-fav-comp="' + ScorrCore.esc(groupId) + '"' +
+      ' aria-pressed="' + (isFav ? 'true' : 'false') + '"' +
+      ' aria-label="' + (isFav ? 'Remove this competition from your favourites' : 'Add this competition to your favourites') + '"' +
+      ' title="' + (isFav ? 'Favourited - click to remove' : 'Favourite this competition') + '">' +
+      DASH_STAR_SVG + '</span>';
+  }
+  // One competition group's accordion header + cards. Shared by the country
+  // sections and the pinned Favourite comps section, so the star + markup can
+  // never drift between them. The star lives in a flex head-row NEXT TO the
+  // toggle button (not inside it), keeping the accordion button a single button.
+  function compGroupHtml(panelId, group, compDefaults) {
+    var collapsed = isGroupCollapsed(panelId, group.groupId, compDefaults[group.groupId]);
+    // 22 July 2026 (Andy): accordion group HEADINGS use the full competition
+    // name ("UEFA Champions League", "Club Friendlies") - there's plenty of
+    // room on the collapsible row. Only the match CARDS keep the short badge.
+    var compLabel = group.comp.name || group.comp.shortName;
+    var cardsHtml = group.matches.map(dashMatchCardHtml).join('');
+    var crestUrl = (group.matches[0] && group.matches[0].fixture.league && group.matches[0].fixture.league.logo)
+      ? group.matches[0].fixture.league.logo
+      : '';
+    var crestHtml = crestUrl
+      ? '<img class="dash-group-crest" src="' + ScorrCore.esc(crestUrl) + '" alt="" onerror="this.style.visibility=\'hidden\'">'
+      : '';
+    return '<div class="dash-group dash-group-comp' + (collapsed ? ' collapsed' : '') + '" data-panel="' + panelId + '" data-group-id="' + group.groupId + '">' +
+      '<button type="button" class="dash-group-toggle" aria-expanded="' + (!collapsed) + '">' +
+        '<svg class="dash-group-chevron" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg>' +
+        crestHtml +
+        '<span class="dash-group-label">' + ScorrCore.esc(compLabel) + '</span>' +
+        // P1a: star sits right AFTER the name (Andy) - inside the toggle, its
+        // own handler stopPropagation-s so it favourites without collapsing.
+        dashFavStarHtml(group.groupId, isFavouriteCompId(group.groupId)) +
+        '<span class="dash-group-count">' + group.matches.length + '</span>' +
+      '</button>' +
+      '<div class="dash-group-body">' + cardsHtml + '</div>' +
+    '</div>';
+  }
+  // A country-level (or the pinned Favourite comps) accordion wrapping its
+  // competition groups. iconHtml is the flag (real country) or the gold star
+  // (favourites section).
+  function countryGroupHtml(panelId, countryGroupId, labelText, iconHtml, matchCount, childGroups, compDefaults) {
+    // Country-level default is DERIVED: expanded if any competition inside it
+    // is EFFECTIVELY expanded (its stored override if touched, else its
+    // computed default) - so collapsing England never fights EPL wanting to
+    // expand. A stored country-level override still wins outright.
+    var anyChildExpanded = childGroups.some(function (g) {
+      return isGroupCollapsed(panelId, g.groupId, compDefaults[g.groupId]) === false;
+    });
+    var countryCollapsed = isGroupCollapsed(panelId, countryGroupId, !anyChildExpanded);
+    var compGroupsHtml = childGroups.map(function (group) {
+      return compGroupHtml(panelId, group, compDefaults);
+    }).join('');
+    return '<div class="dash-group' + (countryCollapsed ? ' collapsed' : '') + '" data-panel="' + panelId + '" data-group-id="' + countryGroupId + '">' +
+      '<button type="button" class="dash-group-toggle" aria-expanded="' + (!countryCollapsed) + '">' +
+        '<svg class="dash-group-chevron" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="9 6 15 12 9 18"></polyline></svg>' +
+        iconHtml +
+        '<span class="dash-group-label">' + ScorrCore.esc(labelText) + '</span>' +
+        '<span class="dash-group-count">' + matchCount + '</span>' +
+      '</button>' +
+      '<div class="dash-group-body">' + compGroupsHtml + '</div>' +
+    '</div>';
+  }
+  var DASH_FAV_STAR_ICON = '<svg class="dash-group-fav-icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
+  function renderDashList(panelId, containerId, matches, emptyMessage) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    if (!matches.length) {
+      container.innerHTML = '<p class="dash-empty">' + emptyMessage + '</p>';
+      wireDashFavStars(container);
+      return;
+    }
+    // P1a: pull favourited comps OUT of their home country group into a pinned
+    // "Favourite comps" section at the top, in the visitor's saved order. A
+    // hidden comp never reaches here (buildPanelSelection drops panel-off comps
+    // via panelVisibilityFor), so "hidden overrides favourite" falls out for
+    // free - a hidden favourite simply has no matches to pull out.
+    var favOrder = favouriteCompOrder();
+    var favRank = {};
+    favOrder.forEach(function (gid, i) { favRank[gid] = i; });
+    var favMatches = [], restMatches = [];
+    matches.forEach(function (m) {
+      var gid = (m.comp && (m.comp.groupId || m.comp.id)) || '';
+      (favRank[gid] != null ? favMatches : restMatches).push(m);
+    });
+
+    var countries = groupMatchesByCountry(restMatches);
+    // Session 25 (Decision B): computed defaults are per PANEL, across every
+    // country's competition groups AND the favourites section (the top-2 floor
+    // must see the whole panel, not one country at a time).
+    var allCompGroups = [];
+    var compGroupsByCountry = {};
+    countries.forEach(function (country) {
+      var groups = groupMatchesByCompetition(country.matches);
+      compGroupsByCountry[country.countryId] = groups;
+      groups.forEach(function (g) { allCompGroups.push(g); });
+    });
+    // Favourite comp groups, ordered by the visitor's saved favourite order
+    // (not priority - the star order is the whole point of the section).
+    var favGroups = [];
+    if (favMatches.length) {
+      favGroups = groupMatchesByCompetition(favMatches).slice().sort(function (a, b) {
+        var ra = favRank[a.groupId] != null ? favRank[a.groupId] : 999;
+        var rb = favRank[b.groupId] != null ? favRank[b.groupId] : 999;
+        return ra - rb;
+      });
+      favGroups.forEach(function (g) { allCompGroups.push(g); });
+    }
+    var compDefaults = computeCompDefaults(allCompGroups);
+
+    var html = '';
+    if (favGroups.length) {
+      var favMatchCount = favGroups.reduce(function (n, g) { return n + g.matches.length; }, 0);
+      html += countryGroupHtml(panelId, 'country:favourites', 'Favourite comps', DASH_FAV_STAR_ICON, favMatchCount, favGroups, compDefaults);
+    }
+    html += countries.map(function (country) {
+      var flagHtml = country.countryFlag
+        ? '<img class="dash-group-flag" src="' + ScorrCore.esc(country.countryFlag) + '" alt="" onerror="this.style.visibility=\'hidden\'">'
+        : '';
+      return countryGroupHtml(panelId, 'country:' + country.countryId, country.countryName, flagHtml, country.matches.length, compGroupsByCountry[country.countryId], compDefaults);
+    }).join('');
+    container.innerHTML = html;
+    wireDashGroupToggles(container);
+    wireDashFavStars(container);
+  }
+  // P1a: wire the gold favourite stars in a freshly-rendered panel. Capture
+  // phase so a tap on the star toggles the favourite and NEVER also fires the
+  // accordion toggle underneath it (same reason competition-page pill removal
+  // uses stopPropagation). Toggling re-renders all three panels from the
+  // cached fixtures so the comp jumps into / out of the Favourite comps
+  // section immediately, with no refetch.
+  function wireDashFavStars(container) {
+    container.querySelectorAll('.dash-fav-star').forEach(function (star) {
+      function activate(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFavouriteCompId(star.getAttribute('data-fav-comp'));
+        rerenderDashPanelsFromCache();
+      }
+      star.addEventListener('click', activate);
+      star.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') activate(e);
+      });
+    });
+  }
+  // ── Session (World Cup follow-up, Part 3): My Teams panel ─────────
+  // For each FAVOURITE team (ScorrCore.getFavourites(), unlimited - Session 37),
+  // finds every fixture involving that team across every browsable
+  // competition (reusing the same `entries` result
+  // loadAllCompetitionFixtures() already produced for the Live Now /
+  // Next 12 Hours panels - no separate fetch), then picks:
+  //   - lastResult: the most recent FINISHED (FT/AET/PEN) fixture
+  //   - nextFixture: the earliest fixture that is NOT finished and NOT
+  //     postponed/cancelled, sorted chronologically. This
+  //     deliberately picks up a fixture that's currently LIVE (its
+  //     kickoff has already passed but it's still in progress) ahead
+  //     of a future not-started one, since a live match is more
+  //     relevant to show as "next" than a later scheduled one.
+  //     PST/CANC fixtures are excluded from "next" since surfacing a
+  //     postponed match as someone's next fixture would be actively
+  //     misleading, not just noisy.
+  // Both sides reuse dashMatchCardHtml() directly (same {fixture,
+  // comp} shape findTeamFixturesAcrossComps() below produces), so the
+  // match cards inside each team's card are visually identical to
+  // every other dashboard panel - same crest/score/status/comp-badge
+  // treatment, same click-through to competition.html.
+  var TEAM_FIXTURE_FINISHED_STATUSES = ScorrCore.FINISHED_STATUSES; // Audit B: the one list
+  var TEAM_FIXTURE_EXCLUDED_FROM_NEXT = ScorrCore.FINISHED_STATUSES.concat(['PST', 'CANC']); // Audit B: derived
+  // Session 18m: the real implementation (and its "fetch once, cache
+  // forever" behaviour) now lives in js/team-fixtures.js
+  // (window.ScorrFixtures), shared with team.html - see that file's
+  // comment for the original bug-fix rationale. Thin wrapper here for
+  // the same reason as loadAllCompetitionFixtures() above.
+  function loadArchivedFixturesOnce() {
+    return window.ScorrFixtures.loadArchivedFixturesOnce();
+  }
+  // Session 18m: the real implementation now lives in
+  // js/team-fixtures.js (window.ScorrFixtures), shared with
+  // team.html - thin wrapper here, same reason as the two above.
+  function findTeamFixturesAcrossComps(entries, team) {
+    return window.ScorrFixtures.findTeamFixturesAcrossComps(entries, team);
+  }
+  function byFixtureDateAsc(a, b) {
+    return new Date(a.fixture.fixture.date) - new Date(b.fixture.fixture.date);
+  }
+  function formatDashDate(isoDate) {
+    // 9 Aug 2026 (F4b): the shared card-date formatter in core.js, year on.
+    // Was a local Intl copy - identical output ("Mon, 4 Aug 2026").
+    return ScorrCore.formatCardDate(isoDate, true);
+  }
+  // browsableEntries: this refresh cycle's active/upcoming default
+  // configs (same pool Live Now/Next 12 Hours use). archivedEntries:
+  // every archived season config, fetched once and reused (see
+  // loadArchivedFixturesOnce() above). Last Result searches BOTH pools
+  // combined, so a team's most recent finished match is found
+  // correctly even when their current season hasn't started yet - see
+  // the bug-fix note above. Next Fixture searches browsableEntries
+  // only: an archived season has no future fixtures by definition, so
+  // including it there would only add search cost with no possible
+  // effect on the result.
+  function buildMyTeamEntry(browsableEntries, archivedEntries, team) {
+    var lastResultPool = browsableEntries.concat(archivedEntries);
+    var allMatches = findTeamFixturesAcrossComps(lastResultPool, team);
+    var finished = allMatches.filter(function (m) {
+      return TEAM_FIXTURE_FINISHED_STATUSES.indexOf(m.fixture.fixture.status.short) !== -1;
+    }).sort(byFixtureDateAsc);
+    var lastResult = finished.length ? finished[finished.length - 1] : null;
+    var upcomingMatches = findTeamFixturesAcrossComps(browsableEntries, team);
+    var upcoming = upcomingMatches.filter(function (m) {
+      return TEAM_FIXTURE_EXCLUDED_FROM_NEXT.indexOf(m.fixture.fixture.status.short) === -1;
+    }).sort(byFixtureDateAsc);
+    var nextFixture = upcoming.length ? upcoming[0] : null;
+    return { team: team, lastResult: lastResult, nextFixture: nextFixture };
+  }
+  function myTeamCardHtml(entry) {
+    var team = entry.team;
+    // Session 37: binary favourites - every card gets the same gold top
+    // edge (the old per-team highlight colours live on the competition
+    // page only now).
+    var borderColor = 'var(--gold)';
+    var sampleMatch = entry.lastResult || entry.nextFixture;
+    var crestHtml = '';
+    if (sampleMatch) {
+      var f = sampleMatch.fixture;
+      var home = ScorrCore.formatTeamName(f.teams.home.name);
+      var logo = (home === team)
+        ? ((f.teams.home && f.teams.home.logo) ? f.teams.home.logo : '')
+        : ((f.teams.away && f.teams.away.logo) ? f.teams.away.logo : '');
+      crestHtml = logo ? '<img class="my-team-crest" src="' + ScorrCore.esc(logo) + '" alt="" onerror="this.style.visibility=\'hidden\'">' : '';
+    }
+    var lastDateText = entry.lastResult ? formatDashDate(entry.lastResult.fixture.fixture.date) : '';
+    var nextDateText = entry.nextFixture ? formatDashDate(entry.nextFixture.fixture.fixture.date) : '';
+    var lastLabel = 'Last Result' + (lastDateText ? ' - ' + lastDateText : '');
+    var nextLabel = 'Next Fixture' + (nextDateText ? ' - ' + nextDateText : '');
+    var lastHtml = entry.lastResult
+      ? dashMatchCardHtml(entry.lastResult)
+      : '<p class="dash-empty my-team-empty">No result yet.</p>';
+    var nextHtml = entry.nextFixture
+      // longDate: a favourite's next fixture can be weeks away - show
+      // "20th August 11:00 pm", not a misleading bare weekday
+      ? dashMatchCardHtml(entry.nextFixture, { longDate: true })
+      : '<p class="dash-empty my-team-empty">No upcoming fixture scheduled.</p>';
+    return '<div class="my-team-card" style="border-top:3px solid ' + borderColor + ';">' +
+      '<a class="my-team-heading" href="team.html?team=' + encodeURIComponent(team) + '">' + crestHtml + '<span class="my-team-name">' + ScorrCore.esc(team) + '</span></a>' +
+      '<p class="my-team-sublabel">' + lastLabel + '</p>' + lastHtml +
+      '<p class="my-team-sublabel">' + nextLabel + '</p>' + nextHtml +
+    '</div>';
+  }
+  function refreshMyTeamsPanel(browsableEntries) {
+    var section = document.getElementById('my-teams-section');
+    var container = document.getElementById('my-teams-list');
+    if (!section || !container) return;
+    var highlights = ScorrCore.getFavourites(); // Session 37
+    if (highlights.length === 0) {
+      if (window.innerWidth > 600) {
+        // Desktop: the favourites search that ADDS a team now lives
+        // inside this section's own heading row - hiding the whole
+        // section here would hide the only way to add a first team,
+        // so it stays visible with an empty-state prompt instead of
+        // the match-card grid.
+        section.style.display = '';
+        container.innerHTML = '<p class="dash-empty my-teams-section-empty">Search above to add your favourite teams.</p>';
+      } else {
+        // Mobile: unchanged - the favourites search lives separately
+        // in #fav-teams-section up above on this breakpoint, so this
+        // section can stay fully hidden until a team exists.
+        section.style.display = 'none';
+        container.innerHTML = '';
+      }
+      return;
+    }
+    section.style.display = '';
+    if (!container.children.length) {
+      container.innerHTML = '<p class="dash-empty">Loading...</p>';
+    }
+    loadArchivedFixturesOnce().then(function (archivedEntries) {
+      // Session 18n: merge in archived competitions' leg info too - a
+      // team's Last Result can come from an archived UCL/UEL/UECL run
+      // (buildMyTeamEntry searches both pools below), and
+      // refreshDashboardPanels() above only ever populated lastLegInfo
+      // from the currently browsable entries.
+      Object.assign(lastLegInfo, buildKnockoutLegInfoFromEntries(archivedEntries));
+      var cards = highlights.map(function (team) {
+        return buildMyTeamEntry(browsableEntries, archivedEntries, team);
+      });
+      // Audit B (20 July 2026): open event panels in THIS panel now
+      // survive the rebuild too. The sweep's global restore runs
+      // synchronously, but this innerHTML replacement lands on a later
+      // microtask (that .then above) and silently closed any My Teams
+      // panel the user had open - the exact bug Session 40 fixed for
+      // the other three panels. Same capture -> restore pattern, scoped
+      // to this container.
+      var openIds = ScorrCore.captureOpenPanels('#my-teams-list .dash-match-row');
+      container.innerHTML = cards.map(myTeamCardHtml).join('');
+      wireDashEventHover();
+      ScorrCore.restoreOpenPanels('#my-teams-list .dash-match-row', openIds, dashLoadEventsForRow);
+    });
+  }
+  // Caches the last fetched fixture entries so the My Teams panel can
+  // be re-rendered instantly when a team is added/removed (via the
+  // pill-remove or search-result click handlers above) without
+  // waiting for the 60-second refresh timer or re-fetching from the
+  // Worker.
+  var lastFixtureEntries = [];
+  function refreshMyTeamsPanelFromCache() {
+    refreshMyTeamsPanel(lastFixtureEntries);
+  }
+  // Mode tag ("Live" / "Waiting") for the vidiprinter panel.
+  // Simplified (12 July 2026, per Andy): previously the vidiprinter
+  // inferred "Live" from whether it had ever seen an event in this
+  // browser session - meaning old backlog still sitting in the feed
+  // (e.g. from an earlier match, or a quiet off-season stretch) would
+  // flip the tag to Live on page load even when nothing was actually
+  // happening right now. Live Now already knows definitively whether
+  // anything's live - a real fixtures query, refreshed every 60s - so
+  // the tag just defers to that instead of the vidiprinter guessing
+  // from its own event history. One source of truth, simpler logic.
+  function updateVidiprinterModeTag(hasLiveMatches) {
+    var tag = document.getElementById('vpModeTag');
+    if (!tag) return;
+    tag.textContent = hasLiveMatches ? 'Live' : 'Waiting';
+    tag.classList.toggle('live', hasLiveMatches);
+  }
+  // Session 18k Part 2: heading text follows the selected window so it
+  // never reads "Next 12 Hours" while actually showing a 24h or 48h
+  // range. initNextWindowSelect() sets the dropdown's initial value
+  // from storage on page load and re-renders Next 12 Hours instantly
+  // from cached fixture data on every change - no refetch, no waiting
+  // for the 60s refresh timer.
+  function updateNextWindowHeading() {
+    var heading = document.getElementById('next12-heading');
+    if (heading) heading.textContent = 'Next ' + getNextWindowHours() + ' Hours';
+  }
+  function initNextWindowSelect() {
+    var select = document.getElementById('next12-window-select');
+    if (!select) return;
+    select.value = String(getNextWindowHours());
+    updateNextWindowHeading();
+    select.addEventListener('change', function () {
+      var hours = parseInt(select.value, 10);
+      if (NEXT_WINDOW_OPTIONS.indexOf(hours) === -1) return;
+      setNextWindowHours(hours);
+      updateNextWindowHeading();
+      renderDashList('next12', 'next12-list', buildPanelSelection(lastFixtureEntries, isInNextWindow), 'No fixtures in the next ' + hours + ' hours.');
+      wireDashEventHover();
+    });
+  }
+  // 16 July 2026 (audit fix FE-C3): timestamp for the visibilitychange
+  // catch-up throttle at the bottom of this script.
+  var lastDashPanelsRefreshAt = 0;
+  // Audit B (20 July 2026): the sweep gets what both other pages have
+  // had since 16 July - change detection and an in-flight guard. The
+  // dashboard used to rebuild all three panels' DOM every quiet minute
+  // (identical data or not) and a slow sweep could overlap the next.
+  // The fingerprint covers the fixture DATA (shared helper) plus the
+  // three panels' membership (so a fixture crossing the Next-X window
+  // boundary still re-renders) plus favourites (they drive sorting and
+  // card marking). Direct render paths - the window dropdown, the
+  // favourites picker, My Teams cache refresh - bypass this by design
+  // and stay instant.
+  var dashPanelsInFlight = false;
+  var lastDashPanelsFingerprint = '';
+
+  function refreshDashboardPanels() {
+    if (dashPanelsInFlight) return;
+    dashPanelsInFlight = true;
+    lastDashPanelsRefreshAt = Date.now();
+    loadAllCompetitionFixtures().then(function (entries) {
+      dashPanelsInFlight = false;
+      lastFixtureEntries = entries;
+      // Session 40 sitting 1 (18 July 2026, Andy's "Bellingham's 6th on
+      // the vidi but not the events card"): open event panels now
+      // SURVIVE the sweep and get refreshed by it. Before this, every
+      // 60s re-render silently closed open panels (competition.html and
+      // team.html both preserve theirs - this page never did), and a
+      // panel that dodged the re-render sat on cached events while the
+      // vidiprinter typed new goals next to it. Same openIds capture ->
+      // restore -> reload pattern as the other two pages;
+      // dashLoadEventsForRow() serves finished matches from cache and
+      // background-refreshes live ones, so the restored panel is also
+      // the moment fresh events (and the Session 40 score override)
+      // arrive.
+      // (Consolidation 3: capture/restore pair shared via ScorrCore.)
+      // Session 18n: computed here so it's ready before dashMatchCardHtml()
+      // runs for any of the three panels below or for My Teams.
+      lastLegInfo = buildKnockoutLegInfoFromEntries(entries);
+      var liveNowMatches = buildPanelSelection(entries, isLiveFixture);
+      var nextMatches = buildPanelSelection(entries, isInNextWindow);
+      var recentMatches = buildPanelSelection(entries, isRecentResult, true);
+      // Audit B (20 July 2026): the mode tag reflects RAW live fixtures,
+      // not the panel selection - with every live comp panel-gated by
+      // the admin dial, the tag used to read "Waiting" while goals were
+      // visibly typing in the feed below it.
+      var anyLiveAnywhere = entries.some(function (e) { return (e.fixtures || []).some(isLiveFixture); });
+      updateVidiprinterModeTag(anyLiveAnywhere);
+
+      // Audit B: change detection - identical data + membership +
+      // favourites = zero DOM work this minute.
+      // (buildPanelSelection returns a FLAT sorted match list -
+      // {fixture, comp, isHighlighted} - so membership is just the
+      // ordered fixture ids per panel.)
+      var membership = [liveNowMatches, nextMatches, recentMatches].map(function (sel) {
+        return sel.map(function (m) { return m.fixture.fixture.id; }).join(',');
+      }).join('|');
+      var allFixtures = [];
+      entries.forEach(function (e) { (e.fixtures || []).forEach(function (f) { allFixtures.push(f); }); });
+      var fp = ScorrCore.fixtureFingerprint(allFixtures) + '::' + membership + '::' + JSON.stringify(ScorrCore.getFavourites()) + '::' + JSON.stringify(favouriteCompOrder());
+      if (fp === lastDashPanelsFingerprint) {
+        // Data unchanged - skip the DOM rebuild, but OPEN panels still
+        // get their background events refresh. The sweep-driven reload
+        // is Session 40's mechanism for keeping an open panel's events
+        // (and the score-from-events override) fresh - /events can move
+        // while /fixtures hasn't. Cheap: finished panels serve from
+        // cache with zero fetches; only live ones re-poll (KV-warm).
+        // (Written as a var-assigned list deliberately: test-consol3's
+        // static guard polices the OLD inline capture-loop pattern this
+        // is not - no ids are collected here, it's a refresh pass.)
+        var openRows = document.querySelectorAll('.dash-match-row.events-open');
+        for (var oi = 0; oi < openRows.length; oi++) dashLoadEventsForRow(openRows[oi]);
+        return;
+      }
+      lastDashPanelsFingerprint = fp;
+
+      var openIds = ScorrCore.captureOpenPanels('.dash-match-row');
+      renderDashList('live-now', 'live-now-list', liveNowMatches, 'Nothing live right now.');
+      renderDashList('next12', 'next12-list', nextMatches, 'No fixtures in the next ' + getNextWindowHours() + ' hours.');
+      renderDashList('recent-results', 'recent-results-list', recentMatches, 'No results in the last ' + RECENT_RESULTS_WINDOW_HOURS + ' hours.');
+      wireDashEventHover();
+      refreshMyTeamsPanel(entries);
+      ScorrCore.restoreOpenPanels('.dash-match-row', openIds, dashLoadEventsForRow);
+    }).catch(function (err) {
+      // Audit B: never leave the guard wedged.
+      dashPanelsInFlight = false;
+      console.error(err);
+    });
+  }
+  // P1a (26 July 2026): re-render all three panels + My Teams from the
+  // already-loaded fixtures, no refetch. Called when the visitor stars/unstars
+  // a competition on the dashboard - the fixture DATA hasn't changed, only
+  // which comps are favourited, so a full 26-fetch sweep would be wasteful.
+  // Falls back to a real refresh if nothing's cached yet. Rebuilds through the
+  // exact same selection + render path the sweep uses (favBoostActive and the
+  // Favourite comps pull-out both read live state), and invalidates the
+  // fingerprint so the next sweep reconciles cleanly.
+  function rerenderDashPanelsFromCache() {
+    var entries = lastFixtureEntries;
+    if (!entries) { refreshDashboardPanels(); return; }
+    lastLegInfo = buildKnockoutLegInfoFromEntries(entries);
+    var liveNowMatches = buildPanelSelection(entries, isLiveFixture);
+    var nextMatches = buildPanelSelection(entries, isInNextWindow);
+    var recentMatches = buildPanelSelection(entries, isRecentResult, true);
+    var openIds = ScorrCore.captureOpenPanels('.dash-match-row');
+    renderDashList('live-now', 'live-now-list', liveNowMatches, 'Nothing live right now.');
+    renderDashList('next12', 'next12-list', nextMatches, 'No fixtures in the next ' + getNextWindowHours() + ' hours.');
+    renderDashList('recent-results', 'recent-results-list', recentMatches, 'No results in the last ' + RECENT_RESULTS_WINDOW_HOURS + ' hours.');
+    wireDashEventHover();
+    refreshMyTeamsPanel(entries);
+    ScorrCore.restoreOpenPanels('.dash-match-row', openIds, dashLoadEventsForRow);
+    lastDashPanelsFingerprint = null; // force the next sweep to rebuild cleanly
+  }
+  // ── Session 18h vidiprinter renderer: moved to js/vidiprinter.js
+  // (20 July 2026) - shared with the standalone vidiprinter.html page.
+  // Loaded via the script tag at the end of body. Edit THERE, not here.
+  renderFavPills();
+  // Accounts: a cross-device sync pull changes favourites AFTER this first
+  // render, so re-draw the fav-team pills (and My Teams cards) when it fires.
+  document.addEventListener('scorr:favourites-changed', function () {
+    try { renderFavPills(); } catch (e) {}
+    try { refreshMyTeamsPanelFromCache(); } catch (e) {}
+  });
+  // "Sync devices" entry point -> the customise page's sync section.
+  // Accounts E3 (5 Aug 2026): sync is live for everyone, so this always shows.
+  (function () {
+    var btn = document.getElementById('sync-devices-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () { window.location.href = 'customise.html#cz-sync'; });
+    btn.hidden = false;
+  })();
+  initTeamSearch();
+  initNextWindowSelect();
+  wireSectionToggle('live-now-toggle', 'live-now-panel', 'live-now');
+  wireSectionToggle('next12-toggle', 'next12-panel', 'next12');
+  wireSectionToggle('recent-results-toggle', 'recent-results-panel', 'recent-results');
+  relocateTeamSearch();
+  window.addEventListener('resize', relocateTeamSearch);
+  refreshDashboardPanels();
+  // 16 July 2026 (audit fix FE-C3): same hidden-tab guard as the
+  // vidiprinter poll above - this is the expensive one (~26 parallel
+  // /fixtures requests per tick, one per competition group). Tab hidden
+  // -> skip; on return, refresh immediately (throttled so rapid tab
+  // flipping doesn't stack full 26-fetch sweeps) so the user never sees
+  // stale panels.
+  setInterval(function () {
+    if (document.hidden) return;
+    refreshDashboardPanels();
+  }, 60000);
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && Date.now() - lastDashPanelsRefreshAt > 15000) {
+      refreshDashboardPanels();
+    }
+  });
+</script>
+<script src="js/vidiprinter.js?v=20260730b"></script>
+<script>
+  // ── Slice 3: panel "..." options menu (open/close) ────────────────
+  // Delegated so all three panel menus share one handler. Clicking a
+  // panel-menu-btn toggles its own popover and closes any other; a
+  // click anywhere else, or Escape, closes them all. The menu items
+  // are plain <a> links, so following one just navigates normally.
+  (function () {
+    function closeAll(except) {
+      var pops = document.querySelectorAll('.panel-menu-pop.open');
+      for (var i = 0; i < pops.length; i++) {
+        if (pops[i] === except) continue;
+        pops[i].classList.remove('open');
+        var btn = pops[i].parentNode.querySelector('.panel-menu-btn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.panel-menu-btn') : null;
+      if (btn) {
+        e.preventDefault();
+        var pop = btn.parentNode.querySelector('.panel-menu-pop');
+        var willOpen = pop && !pop.classList.contains('open');
+        closeAll(willOpen ? pop : null);
+        if (pop) {
+          pop.classList.toggle('open', !!willOpen);
+          btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        }
+        return;
+      }
+      // click outside any menu button closes everything (menu-item
+      // clicks fall through here too, but they navigate away anyway)
+      closeAll(null);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll(null);
+    });
+
+    // ── "What's New" bars: independent, content-hashed dismissal ─────
+    // Each .whats-new-bar dismisses on its OWN, keyed to a hash of ITS
+    // content. So bars stack: a returning visitor who dismissed the first
+    // bar still sees a newly-added second bar; a fresh visitor sees both and
+    // clears each. Any edit to a bar's text changes only THAT bar's hash and
+    // re-shows only that bar. To announce a new batch, add another
+    // .whats-new-bar inside #whats-new-stack - no version-bumping, no code.
+    // Session D (27 July 2026): the goal-alerts bar is gated to the Part 2
+    // go-live. Flip NOTIFICATIONS_LIVE to true (and redeploy index.html) on
+    // 3 August, when the fetcher send path is live, so the announce never
+    // lands before a goal can actually reach a phone.
+    var NOTIFICATIONS_LIVE = true;
+    [].slice.call(document.querySelectorAll('.whats-new-bar')).forEach(function (bar) {
+      if (bar.getAttribute('data-gate') === 'notifications' && !NOTIFICATIONS_LIVE) {
+        bar.style.display = 'none';
+        return;
+      }
+      var src = bar.querySelector('.wn-body') || bar;
+      var txt = (src.textContent || '').replace(/\s+/g, ' ').trim();
+      var h = 5381;
+      for (var i = 0; i < txt.length; i++) { h = ((h << 5) + h + txt.charCodeAt(i)) >>> 0; }
+      var key = 'scorr-wn-' + h;
+      var dismissed = false;
+      try { dismissed = localStorage.getItem(key) === '1'; } catch (e) {}
+      // Set BOTH ways: a dismissed bar must be hidden on reload even if it
+      // carries no inline display:none (the CSS default is display:flex). The
+      // earlier goal-alerts bar only stayed hidden because it shipped with an
+      // inline display:none; bars without one would otherwise reappear.
+      bar.style.display = dismissed ? 'none' : '';
+      var close = bar.querySelector('.wn-close');
+      if (close) {
+        close.addEventListener('click', function () {
+          bar.style.display = 'none';
+          try { localStorage.setItem(key, '1'); } catch (e) {}
+        });
+      }
+    });
+  })();
+</script>
+<script>
+  // Session D (27 July 2026): mount the goal-alert opt-in in My Teams.
+  (function () {
+    function mount() {
+      if (!window.ScorrPush) return;
+      var slot = document.getElementById('scorr-alerts-mount');
+      if (slot) ScorrPush.mountAlertsControl(slot);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
+    else mount();
+  })();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1e7b10bf2d6f434e9ea2df67e32bef72","r":1}' crossorigin="anonymous"></script>
+</body>
+</html>
